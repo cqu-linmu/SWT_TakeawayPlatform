@@ -1,4 +1,4 @@
-from ...DataBase import db
+from DataBase import db
 
 class Restaurant(db.Model):
     __tablename__ = 'RestaurantData'
@@ -6,9 +6,9 @@ class Restaurant(db.Model):
     #StaticData
     RestaurantID = db.Column(db.INTEGER, primary_key=True, autoincrement=True)
     RestaurantName = db.Column(db.String(10), nullable=False)
-    HeadPortrait = db.Column(db.String(100), nullable=False)
+    HeadPortrait = db.Column(db.String(100), nullable=False,default='DefaultPath')
     Address = db.Column(db.String(50), nullable=False)
-    Description = db.Column(db.String(500), nullable=False)
+    Description = db.Column(db.String(500), nullable=False,default='None')
 
     #DynamicData
-    Dishes = db.Column(db.String(), nullable=True)
+    #Dishes = db.Column(db.String(), nullable=True)
