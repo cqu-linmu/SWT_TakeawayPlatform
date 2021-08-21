@@ -1,6 +1,7 @@
 from DataBase import db
+from ..ModelsParameter import EntityBase
 
-class Restaurant(db.Model):
+class Restaurant(db.Model,EntityBase):
     __tablename__ = 'RestaurantData'
 
     #StaticData
@@ -9,6 +10,14 @@ class Restaurant(db.Model):
     HeadPortrait = db.Column(db.String(100), nullable=False,default='DefaultPath')
     Address = db.Column(db.String(50), nullable=False)
     Description = db.Column(db.String(500), nullable=False,default='None')
+    Benefits = db.Column(db.String(1000),nullable=False,default='')
+    OrderNum = db.Column(db.String(1000),nullable=False,default='')
 
     #DynamicData
-    #Dishes = db.Column(db.String(), nullable=True)
+    TotalBenefits = db.Column(db.INTEGER, nullable=False, default=0)
+    Dishes = db.relationship("Dish",backref='RestaurantData')
+    Orders = db.relationship('Order',backref='RestaurantData')
+
+    def AddTotalBenefits(self,NewBenefits):
+        self.Benefits+=NewBenefits
+        return self.Benefits

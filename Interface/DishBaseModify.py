@@ -9,10 +9,9 @@ def ServerTest():
     print('Connect Success')
     return jsonify('Test Success')
 
-@dish.route('/add/<dishname>/<price>')
-def Add(dishname, price):
+def PyDirectlyAdd(dishname, price, type, tag, picture, description):
     print(dishname, price)
-    dishinfo = Dish(DishName=dishname,Price=price)
+    dishinfo = Dish(DishName=dishname,Price=price,DishType=type,DishTag=tag,Details_Picture=picture,Description=description)
     db.session.add(dishinfo)
     db.session.commit()
     return jsonify("ADD_SUCCESS")
@@ -26,7 +25,23 @@ def List():
         dishes_output.append(dish.to_json())
     return jsonify(dishes_output)
 
+def PyList():
+    return Dish.query.all()
+
 @dish.route('/details/<dishid>')
-def Find(dishid):
+def Find_ID(dishid):
     dish = Dish.query.get(dishid)
     return jsonify(dish.to_json())
+
+def PyFind_ID(dishid):
+    return Dish.query.get(dishid)
+
+def PyFind_Name(dishname):
+    return Dish.query.filter_by(DishName=dishname)
+
+def PyFind_Type(dishtype):
+    return Dish.query.filter(DishType=dishtype).all()
+
+def PyFind_Tag(dishtag):
+    return Dish.query.filter(Dish.DishTag.__contains__(dishtag)).all()
+

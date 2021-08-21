@@ -19,15 +19,13 @@ class User(db.Model,EntityBase):
 
     #StaticInfo
     HeadPortrait = db.Column(db.String(100),nullable=False,default='DefaultPath')
-    Address = db.Column(db.String(50), nullable=False,default='NeedInit')
+    Address = db.Column(db.String(500), nullable=False)  #Use '/' to divide diverse addresses
     Telephone = db.Column(db.String(20),nullable=False,default='NeedInit')
 
     #DynamicInfo
     _HaveLogin = db.Column(db.Boolean,default=False)
-    UserExtraRelief = db.Column(db.String(100), default='')
-    HaveOrder = db.Column(db.Boolean,default=False)
-    Orders = db.Column(db.String(200),default='')    #String to simulate list, use '/' to divide
-    Select = db.Column(db.String(200),default='')    #String to simulate list, use '/' to divide
+    # String to simulate list, use '|' to divide ID and price, use '/' to divide diverse dishes
+    Dishes = db.Column(db.String(2000),default='')
 
     def Login(self):
         if(not self._HaveLogin):
@@ -100,3 +98,5 @@ class User(db.Model,EntityBase):
 
     def UnBindQQ(self):
         self.HaveQQBind=False
+
+    Orders = db.relationship('Order', backref='UserData_ALL')
