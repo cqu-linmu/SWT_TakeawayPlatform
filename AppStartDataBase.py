@@ -5,6 +5,7 @@ from Interface.UserBaseModify import *
 from Interface.RestaurantBaseModify import *
 from Interface.DishBaseModify import *
 from Interface.OrderBaseModify import *
+from Interface.InterfaceHelper import GenericModify
 
 app = Flask(__name__)
 app.config.from_object(DataBaseConfig)
@@ -17,8 +18,13 @@ app.register_blueprint(order,url_prefix='/order')
 
 @app.route('/')
 def Start():
+    '''
     db.drop_all()
     db.create_all()
+    '''
+
+    GenericModify(1,1,'User','Telephone',123456)
+
     return "hello"
 
 if __name__ == '__main__':

@@ -12,13 +12,13 @@ def ServerTest():
 @user.route('/add/<username>/<pwd>')
 def Add(username, pwd):
     print(username, pwd)
-    userinfo = User(UserName=username)
+    userinfo = User(UserName=username,Gender='未知',HeadPortrait='NeedInit',Address='NeedInit',Telephone='NeedInit')
     userinfo.SetPassword(pwd)
     db.session.add(userinfo)
     db.session.commit()
     return jsonify("ADD_SUCCESS")
 
-def PyAdd(username, pwd,Gender=4,headportrait='NeedInit',address='NeedInit',telephone='NeedInit'):
+def PyAdd(username, pwd,Gender='未知',headportrait='NeedInit',address='NeedInit',telephone='NeedInit'):
     print(username, pwd)
     userinfo = User(UserName=username,Gender=Gender,HeadPortrait=headportrait,Address=address,Telephone=telephone)
     userinfo.SetPassword(pwd)
@@ -54,9 +54,9 @@ def PyFind_ID(userid):
 
 @user.route('/find/name/<username>')
 def Find_Name(username):
-    userinfo = User.query.filter_by(UserName=username)
+    userinfo = User.query.filter_by(UserName=username).first()
     return jsonify(userinfo.to_json())
 
 def PyFind_Name(username):
-    userinfo = User.query.filter_by(UserName=username)
+    userinfo = User.query.filter_by(UserName=username).first()
     return userinfo

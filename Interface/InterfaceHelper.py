@@ -22,14 +22,14 @@ def GenericModify(ModifyType, DataID, DataBaseModelName, DataParameterName, NewP
 
         if(ModifyType==1):
 
-            TargetCommand='{}={}.query.filter({}.{}=={}).first()'\
-                .format(TempVarible,ModelName,ModelName,ParamName,QueryID)+'\n'\
+            TargetCommand='{}={}.query.get({})'\
+                .format(TempVarible,ModelName,QueryID)+'\n'\
                 +'{}.{}={}'.format(TempVarible,ParamName,NewValue)+'\n'\
                 +'db.session.merge({})'.format(TempVarible)
 
         elif(ModifyType==2):
 
-            TargetCommand='{}={}.query.filter({}.{}=={}).delete()'.format(TempVarible,ModelName,ModelName,ParamName,DataID)
+            TargetCommand='{}={}.query.get({}).delete()'.format(TempVarible,ModelName,DataID)
 
         exec(TargetCommand)
 

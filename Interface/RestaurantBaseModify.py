@@ -1,7 +1,9 @@
 from flask import Blueprint, jsonify, request, json
 from Models.RestaurantModels.RestaurantBase import Restaurant
+from Models.UserModels.UserBaseInfo import User
 from DataBase import db
 from .DishBaseModify import PyDirectlyAdd as DishAdd
+from .OrderBaseModify import PyDirectlyAdd as OrderAdd
 
 restaurant=Blueprint('restaurant',__name__)
 
@@ -14,11 +16,9 @@ def ServerTest():
 def Add(resname, resadd):
     print(resname, resadd)
     resinfo = Restaurant(RestaurantName=resname,Address=resadd)
-    dishinfo = ('default', 0)
-    resinfo.Dishes.append(dishinfo)
-    db.session.add_all([resinfo,dishinfo])
+    db.session.add(resinfo)
     db.session.commit()
-    return jsonify("ADD_SUCCESS")
+    return jsonify(resinfo.to_json())
 
 def PyAdd(resname, resadd):
     print(resname, resadd)
@@ -28,21 +28,22 @@ def PyAdd(resname, resadd):
     return resinfo
 
 @restaurant.route('/<resid>/adddish/<dishname>/<price>/<type>/<tag>/<picture>/<description>')
-def AddDish(resid,dishname,price,type,tag,picture='DefaultPath',description='None'):
-    dishinfo = DishAdd(dishname,price,type,tag,picture,description)
-    res = Restaurant.query.get(resid)
-    res.Dishes.append(dishinfo)
-    db.session.add([res,dishinfo])
-    db.session.commit()
-    return jsonify("ADD_DISH_SUCCESS")
+def AddDish(resid,dishname,price,type,tag='',picture='DefaultPath',description='None'):
+    dishinfo = DishAdd(resid,dishname,price,type,tag,picture,description)
+    return jsonify(dishinfo.to_json())
 
-def PyAddDish(resid,dishname,price,type,tag,picture='DefaultPath',description='None'):
-    dishinfo = DishAdd(dishname,price,type,tag,picture,description)
-    res = Restaurant.query.get(resid)
-    res.Dishes.append(dishinfo)
-    db.session.add([res,dishinfo])
-    db.session.commit()
+def PyAddDish(resid,dishname,price,type,tag='',picture='DefaultPath',description='None'):
+    dishinfo = DishAdd(resid,dishname, price, type, tag, picture, description)
     return dishinfo
+
+@restaurant.route('/<resid>/addorder/<uid>/<remark>/<address>/<dishes>/<price>/<carriage>')
+def AddOrder(resid, uid, remark, address, dishes, price, carriage):
+    orderinfo=OrderAdd(resid,uid, remark, address, dishes, price, carriage)
+    return jsonify(orderinfo.to_json())
+
+def PyAddOrder(resid,uid, remark, address, orders, price, carriage):
+    orderinfo=OrderAdd(resid,uid, remark, address, orders, price, carriage)
+    return orderinfo
 
 @restaurant.route('/list')
 def List():
@@ -54,18 +55,18 @@ def List():
     return jsonify(ress_output)
 
 def PyList():
-    ress = Restaurant.query.all()
-    return  ress
+    return Restaurant.query.all()
 
-@restaurant.route('/details/<resid>')
+@restaurant.route('/find/id/<resid>')
 def Find_ID(resid):
-    res = Restaurant.query.get(resid)
-    return jsonify(res.to_json())
+    return jsonify(Restaurant.query.get(resid).to_json())
 
 def PyFind_ID(resid):
-    res = Restaurant.query.get(resid)
-    return res
+    return Restaurant.query.get(resid)
+
+@restaurant.route('/find/name/<resname>')
+def Find_Name(resname):
+    return jsonify(Restaurant.query.filter_by(RestaurantName=resname).first().to_json())
 
 def PyFind_Name(resname):
-    res = Restaurant.query.filter_by(RestaurantName=resname)
-    return res
+    return Restaurant.query.filter_by(RestaurantName=resname).first()

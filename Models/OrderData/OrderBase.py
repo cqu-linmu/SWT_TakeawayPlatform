@@ -12,7 +12,7 @@ class Order(db.Model,EntityBase):
     Remark = db.Column(db.String(100), nullable=False,default='DefaultPath')
     OrderAddress = db.Column(db.String(50), nullable=False)
     Dishes = db.Column(db.String(500), default='')
-    OrderStatus = db.Column(db.Enum('待付款','待发货','待收货','待评价','已完成'),nullable=False,default=1)
+    OrderStatus = db.Column(db.Enum('待付款','待发货','待收货','待评价','已完成'),nullable=False,default='待付款')
     Price = db.Column(db.Float, nullable=False)
     Carriage = db.Column(db.Float, nullable=False)
 
