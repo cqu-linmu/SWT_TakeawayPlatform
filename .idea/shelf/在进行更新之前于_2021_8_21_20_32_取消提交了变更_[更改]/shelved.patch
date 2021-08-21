@@ -1,0 +1,89 @@
+Index: app.py
+===================================================================
+diff --git a/app.py b/application.py
+rename from app.py
+rename to application.py
+--- a/app.py	
++++ b/application.py	
+@@ -1,19 +1,27 @@
++# -*- coding: utf-8 -*-
+ from flask import Flask
+-from flask import render_template
+-
+-app = Flask(
+-    __name__,
+-    # 这里是相对路径，不然找不到文件。
+-    template_folder="./frontend/dist",  # 修改默认的HTML文件夹
+-    static_folder="./frontend/dist",  # 修改默认的静态文件文件夹
+-    static_url_path=""
+-)
++from flask_script import Manager
++from flask_sqlalchemy import SQLAlchemy
++from flask_cor import CORS
++import os
++class Application( Flask ):
++    def __init__(self,import_name , template_folder = None,root_path = None ):
++        super( Application,self ).__init__( import_name ,template_folder = template_folder,root_path = root_path,static_folder = None)
++        self.config.from_pyfile( 'config/base_setting.py' )
++        if "ops_config" in os.environ:
++            self.config.from_pyfile( 'config/%s_setting.py'%os.environ['ops_config'] )
+ 
++        db.init_app( self )
+ 
+-@app.route('/')
+-def hello_world():
+-    return render_template("index.html")
++db = SQLAlchemy()
++app = Application( __name__ ,template_folder = os.getcwd() + "/web/templates/",root_path = os.getcwd() )
++manager = Manager(app)
++CORS(app)
++'''
++函数模板
++'''
++from common.libs.UrlManager import UrlManager
++app.add_template_global(UrlManager.buildStaticUrl, 'buildStaticUrl')
++app.add_template_global(UrlManager.buildUrl, 'buildUrl')
++app.add_template_global(UrlManager.buildImageUrl, 'buildImageUrl')
+ 
+-
+-if __name__ == '__main__':
+-    app.run()
+\ No newline at end of file
+Index: .idea/SWT_TakeawayPlatform.iml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<module type=\"PYTHON_MODULE\" version=\"4\">\r\n  <component name=\"NewModuleRootManager\">\r\n    <content url=\"file://$MODULE_DIR$\" />\r\n    <orderEntry type=\"jdk\" jdkName=\"Python 3.6 (venv)\" jdkType=\"Python SDK\" />\r\n    <orderEntry type=\"sourceFolder\" forTests=\"false\" />\r\n  </component>\r\n</module>
+===================================================================
+diff --git a/.idea/SWT_TakeawayPlatform.iml b/.idea/SWT_TakeawayPlatform.iml
+--- a/.idea/SWT_TakeawayPlatform.iml	
++++ b/.idea/SWT_TakeawayPlatform.iml	
+@@ -1,8 +1,10 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <module type="PYTHON_MODULE" version="4">
+   <component name="NewModuleRootManager">
+-    <content url="file://$MODULE_DIR$" />
+-    <orderEntry type="jdk" jdkName="Python 3.6 (venv)" jdkType="Python SDK" />
++    <content url="file://$MODULE_DIR$">
++      <excludeFolder url="file://$MODULE_DIR$/venv" />
++    </content>
++    <orderEntry type="jdk" jdkName="Python 3.7 (SWT_TakeawayPlatform)" jdkType="Python SDK" />
+     <orderEntry type="sourceFolder" forTests="false" />
+   </component>
+ </module>
+\ No newline at end of file
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"ProjectRootManager\" version=\"2\" project-jdk-name=\"Python 3.6 (venv)\" project-jdk-type=\"Python SDK\" />\r\n  <component name=\"PyCharmProfessionalAdvertiser\">\r\n    <option name=\"shown\" value=\"true\" />\r\n  </component>\r\n</project>
+===================================================================
+diff --git a/.idea/misc.xml b/.idea/misc.xml
+--- a/.idea/misc.xml	
++++ b/.idea/misc.xml	
+@@ -1,6 +1,6 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+-  <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.6 (venv)" project-jdk-type="Python SDK" />
++  <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.7 (SWT_TakeawayPlatform)" project-jdk-type="Python SDK" />
+   <component name="PyCharmProfessionalAdvertiser">
+     <option name="shown" value="true" />
+   </component>
