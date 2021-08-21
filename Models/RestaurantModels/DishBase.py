@@ -15,6 +15,7 @@ class Dish(db.Model,EntityBase):
     Price = db.Column(db.Float,nullable=False)
     Sold = db.Column(db.INTEGER,nullable=False,default=0)
     Shared = db.Column(db.INTEGER,nullable=False,default=0)
+    Score = db.Column(db.Float,nullable=False,default=0)
 
     def IncreaseSelf_Sold(self):
         self.Sold+=1
