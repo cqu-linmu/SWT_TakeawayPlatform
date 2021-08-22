@@ -13,7 +13,7 @@ app.config.from_object(DataBaseConfig)
 db.init_app(app)
 
 app.register_blueprint(user,url_prefix="/user")
-app.register_blueprint(restaurant,url_prefix="/restaurant")
+app.register_blueprint(restaurant,url_prefix="/restaurant") 
 app.register_blueprint(dish,url_prefix="/dish")
 app.register_blueprint(order,url_prefix='/order')
 
