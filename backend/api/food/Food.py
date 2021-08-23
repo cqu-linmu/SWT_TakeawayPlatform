@@ -14,19 +14,20 @@ route_food = Blueprint('food_page', __name__)
 
 
 # 餐品管理首页显示
-@route_food.route("/index")
+@route_food.route("/index", methods=['POST'])
 def index():
     req = request.values
     page = int(req['page']) if ('page' in req and req['page']) else 1
-    page_size = req['pageSize']
-    list = d.PyList()
-    listNum = len(list)
+    page_size = int(req['pageSize'])
+    dishList = d.PyList()
+    listNum = len(dishList)
     pageNum = listNum / page_size
+    dishList = dishList[(page - 1) * page_size:page * page_size]
     lic = []
     lic.append({"pageNum": pageNum})
 
-    def bedic(a):
-        for item in a:
+    def bedict(dataList):
+        for item in dataList:
             lic.append(
                 {
                     "dish_id": item.DishID,
@@ -37,11 +38,11 @@ def index():
             )
         return lic
 
-    return jsonify(bedic(list))
+    return jsonify(bedict(dishList))
 
 
 # 餐品编辑
-@route_food.route("/set", methods=['GET', 'POST'])
+@route_food.route("/set", methods=['POST'])
 def set():
     resp = {'code': 1, 'msg': '编辑成功', 'data': {}}  # 提前定义返回信息
     req = request.values
@@ -83,9 +84,8 @@ def set():
         return jsonify(resp)
 
     dish_info = d.PyFind_Name(dish_name)
-    dish_id = dish_info.DishID
 
-    # 以下表达暂定
+
     if not dish_info:
         r.PyAddDish(
             dishname=dish_name,
@@ -94,6 +94,7 @@ def set():
             description=dish_description
         )
     else:
+        dish_id = dish_info.DishID
         GenericModify(3, dish_id, Dish, ['DishName', 'Price', 'DishType', 'Description'], ['\'dish_name\'', \
                                                                                            '\'dish_price\'',
                                                                                            '\'dish-class\'',

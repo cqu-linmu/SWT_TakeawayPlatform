@@ -53,8 +53,8 @@ def login():
 
 
 # 退出登录
-@route_user.route("/logout")
+@route_user.route("/logout", methods=["GET", "POST"])
 def logout():
-    response = make_response(redirect(UrlManager.buildUrl("/user/login")))  # 返回登录页面
+    response = make_response(json.dumps(redirect(UrlManager.buildUrl("/user/login"))))  # 返回登录页面
     response.delete_cookie(app.config['AUTH_COOKIE_NAME'])  # 删除cookie
     return response
