@@ -13,6 +13,7 @@
 - 基于地理位置的餐馆推荐
 - 基于用户喜好的热门餐馆和美食推荐算法等。
 
-文档地址：
+文档编辑地址：
 【接口文档】https://mubu.com/colla/7a0ZPCrMGI6
+
 【项目结构】https://mubu.com/colla/75rMEBe2Kl6
