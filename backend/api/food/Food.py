@@ -19,7 +19,6 @@ def index():
     resp_data = {}  # 返回数据
 
     req = request.values
-    page = int(req['page']) if ('page' in req and req['page']) else 1
     query = Dish.query
 
     # 利用前端传来'mix_kw'进行搜索（名称或许要修改）
@@ -29,16 +28,9 @@ def index():
         query = query.filter(rule)
 
     # 分页
-    page_params = {
-        'total': query.count(),
-        'page_size': app.config['PAGE_SIZE'],
-        'page': page,
-        'display': app.config['PAGE_DISPLAY'],
-        'url': request.full_path.replace("&p={}".format(page), "")
-    }
-    pages = iPagination(page_params)
-    offset = (page - 1) * app.config['PAGE_SIZE']
-    list = query.order_by(Dish.DishID.desc()).offset(offset).limit(app.config['PAGE_SIZE']).all()
+    page = int(req['page']) if ('page' in req and req['page']) else 1
+    page_size = req['pageSize']
+    pages = db.session.quary(Dish).filter(Dish.DishID.panginate(page, page_size))
 
     resp_data['list'] = list
     resp_data['pages'] = pages
