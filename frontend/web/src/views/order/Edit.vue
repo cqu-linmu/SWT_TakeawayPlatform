@@ -75,14 +75,14 @@
 				],
 			})
 			const submitForm = async params => {
-			  const { code, message } = await API.editOrder(state.model)
-			  if (+code===200) {
-			  	ctx.$message.success(message)
-			  	store.dispatch('tags/delTag', route)
-			  	router.push('/order/list?t=' + Date.now())
-			  } else {
-			    ctx.$message.error(message)
-			  }
+				const { code, message } = await API.editOrder(state)
+				if (+code===200) {
+					ctx.$message.success(message)
+					store.dispatch('tags/delTag', route)
+					router.push('/order/list?t=' + Date.now())
+				} else {
+					ctx.$message.error(message)
+				}
 			}
 			const quit = () => {
 				store.dispatch('tags/delTag', route)

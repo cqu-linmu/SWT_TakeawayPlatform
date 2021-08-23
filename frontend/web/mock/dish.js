@@ -91,8 +91,9 @@ export default [
 	//删除菜品
 	{
 		url: '/api/dish/:dish_id',
-		method: 'delete',
+		method: 'get',
 		timeout: 1000,
+		statusCode: 200,
 		response: {
 			// 响应内容
 			code: 200,

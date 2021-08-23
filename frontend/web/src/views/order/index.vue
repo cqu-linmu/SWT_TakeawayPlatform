@@ -73,12 +73,15 @@ export default defineComponent({
       }
     }
     //删除订单
-    const deleteOrder = order_id => {
+    const deleteOrder = order_id_temp => {
       ctx
         .$confirm('是否确认删除？')
         .then(async () => {
           const $loading = ctx.$loading()
-          const { code } = await API.deleteOrder(order_id)
+		  let data={
+			  order_id:order_id_temp
+		  }
+          const { code } = await API.deleteOrder(data)
           $loading.close()
           if (+code === 200) {
             ctx.$message.success('删除成功')

@@ -28,7 +28,7 @@
 				var myChart = echarts.init(chartDom);
 				var option;
 				const { data } = await API.getDishSaleList(params={
-					page:-1,
+					pageNum:-1,
 					pageSize:10
 				})
 				console.log('data:',data)

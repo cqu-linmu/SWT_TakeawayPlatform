@@ -17,10 +17,11 @@ export const getOrderList = data => {
 //   })
 // }
 // 删除订单
-export const deleteOrder = order_id => {
+export const deleteOrder = data => {
   return request({
-    url: `/api/order/${order_id}`,
-    method: 'delete',
+    url: `/api/order/${data.order_id}`,
+    method: 'get',
+	params: data
   })
 }
 // 修改订单 => 订单编辑

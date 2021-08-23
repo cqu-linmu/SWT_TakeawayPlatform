@@ -41,10 +41,11 @@ export const editDish = data => {
 }
 
 // 删除餐品 => 删除菜品
-export const deleteDish = dish_id => {
+export const deleteDish = data => {
   return request({
-    url: `/api/dish/${dish_id}`,
-    method: 'delete',
+    url: `/api/dish/${data.dish_id}`,
+    method: 'get',
+	params: data,
   })
 }
 // 获取餐品分类列表 => 获取餐品分类

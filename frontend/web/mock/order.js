@@ -36,7 +36,7 @@ export default [
 	//删除订单
 	{
 		url: '/api/order/:order_id',
-		method: 'delete',
+		method: 'get',
 		timeout: 1000,
 		response: {
 			// 响应内容
