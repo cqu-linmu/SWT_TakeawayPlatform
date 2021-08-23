@@ -74,16 +74,16 @@ export default [
 			message: '获取餐品分类列表成功',
 			'data': [
 				{
-					name:'主食',
-					value:'主食',
+					class_name:'主食',
+					class_value:'主食',
 				},
 				{
-					name:'小吃',
-					value:'小吃',
+					class_name:'小吃',
+					class_value:'小吃',
 				},
 				{
-					name:'饮品',
-					value:'饮品',
+					class_name:'饮品',
+					class_value:'饮品',
 				},
 			],
 		},

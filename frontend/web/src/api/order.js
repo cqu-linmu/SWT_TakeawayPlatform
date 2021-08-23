@@ -1,6 +1,6 @@
 import request from '@/utils/request'
 
-// 获取订单餐品列表
+// 获取订单列表 => 订单管理
 export const getOrderList = data => {
   return request({
     url: '/api/order-list',
@@ -8,14 +8,14 @@ export const getOrderList = data => {
     params: data,
   })
 }
-// 获取每日订单列表
-export const getOrderDailyList = data => {
-  return request({
-    url: '/api/order-daily-list',
-    method: 'get',
-    params: data,
-  })
-}
+// // 获取每日订单列表
+// export const getOrderDailyList = data => {
+//   return request({
+//     url: '/api/order-daily-list',
+//     method: 'get',
+//     params: data,
+//   })
+// }
 // 删除订单
 export const deleteOrder = order_id => {
   return request({
@@ -23,7 +23,7 @@ export const deleteOrder = order_id => {
     method: 'delete',
   })
 }
-// 修改订单
+// 修改订单 => 订单编辑
 export const editOrder = data => {
   return request({
     url: `/api/order/edit/${data.order_id}`,
@@ -31,11 +31,11 @@ export const editOrder = data => {
     params: data,
   })
 }
-// 获取订单状态列表
-export const getOrderClassList = data => {
-  return request({
-    url: '/api/order_class-list',
-    method: 'get',
-    params: data,
-  })
-}
+// // 获取订单状态列表	
+// export const getOrderClassList = data => {
+//   return request({
+//     url: '/api/order_class-list',
+//     method: 'get',
+//     params: data,
+//   })
+// }

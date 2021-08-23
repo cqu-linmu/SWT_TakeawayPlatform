@@ -68,6 +68,10 @@
 						value: '已完成',
 						label: '已完成',
 					}, 
+					{
+						value: '已取消',
+						label: '已取消',
+					}, 
 				],
 			})
 			const submitForm = async params => {

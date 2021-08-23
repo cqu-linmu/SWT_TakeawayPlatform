@@ -9,8 +9,8 @@
  * @Github: https://github.com/huzhushan/vue3-element-admin
  * @Donate: https://huzhushan.gitee.io/vue3-element-admin/donate/
  */
-import { fixedRoutes, asyncRoutes } from '@/router'
-import { GetMenus } from '@/api/menu'
+import { fixedRoutes } from '@/router'
+// import { GetMenus } from '@/api/menu'
 import router from '@/router'
 
 // const hasPermission = (role, route) => {
@@ -87,23 +87,23 @@ export default {
   },
   actions: {
     async generateMenus({ commit }, userinfo) {
-      // // 方式一：只有固定菜单
-      // const menus = getFilterMenus(fixedRoutes)
-      // commit('SET_MENUS', menus)
+      // 方式一：只有固定菜单
+      const menus = getFilterMenus(fixedRoutes)
+      commit('SET_MENUS', menus)
 
-      // 方式二：有动态菜单
-      // 从后台获取菜单
-      const { code, data } = await GetMenus({ role: userinfo.role })
+      // // 方式二：有动态菜单
+      // // 从后台获取菜单
+      // const { code, data } = await GetMenus({ role: userinfo.role })
 
-      if (+code === 200) {
-        // 过滤出需要添加的动态路由
-        const filterRoutes = getFilterRoutes(asyncRoutes, data)
-        filterRoutes.forEach(route => router.addRoute(route))
+      // if (+code === 200) {
+      //   // 过滤出需要添加的动态路由
+      //   const filterRoutes = getFilterRoutes(asyncRoutes, data)
+      //   filterRoutes.forEach(route => router.addRoute(route))
 
-        // 生成菜单
-        const menus = getFilterMenus([...fixedRoutes, ...filterRoutes])
-        commit('SET_MENUS', menus)
-      }
+      //   // 生成菜单
+      //   const menus = getFilterMenus([...fixedRoutes, ...filterRoutes])
+      //   commit('SET_MENUS', menus)
+      // }
     },
   },
 }
