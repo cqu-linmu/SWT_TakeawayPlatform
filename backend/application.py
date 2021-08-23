@@ -3,7 +3,7 @@ from flask_script import Manager
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
 from flask import Blueprint, request, jsonify
-from DataBaseFolder import DataBaseConfig
+from config import DataBaseConfig
 
 # start debug mode
 DEBUG = True
