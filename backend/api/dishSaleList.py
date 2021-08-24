@@ -13,7 +13,7 @@ route_dishSaleList = Blueprint('dishSaleList', __name__)
 def index():
     req = request.values
     resp = {'code': 200, 'msg': '获取餐品列表成功', 'data': {}, 'total': 0}
-    pageNum = int(req['page']) if ('page' in req and req['page']) else 1
+    pageNum = int(req['pageNum']) if ('pageNum' in req and req['pageNum']) else 1
     page_size=int(req['pageSize']) if ('pageSize' in req and req['pageSize']) else 1
     dishList=d.PyList()
     totalList =len(dishList)
@@ -29,6 +29,7 @@ def index():
                 {
                 "dish_id": item.DishID,
                 "dish_name": item.DishName,
+                "dish.price":item.Price ,
                 "dish_number": item.Sold,
                 "dish_score" :item.Score
                 }

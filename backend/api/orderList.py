@@ -14,7 +14,7 @@ route_orderList = Blueprint('orderList', __name__)
 def index():
     resp = {'code': 200, 'msg': '获取订单列表成功', 'data': {}, 'total': 0}
     req = request.values
-    pageNum = int(req['page']) if ('page' in req and req['page']) else 1  # 当前页数
+    pageNum = int(req['pageNum']) if ('pageNum' in req and req['pageNum']) else 1  # 当前页数
     page_size = int(req['pageSize'])  # 页面订单条数
 
     orderList = o.PyList()
