@@ -8,3 +8,19 @@ SQLALCHEMY_ECHO = True
 SQLALCHEMY_DATABASE_URI = "mysql+pymysql://root:123456@localhost:5000/testdb"
 SQLALCHEMY_TRACK_MODIFICATIONS = False
 SQLALCHEMY_ENCODING = "utf8"
+
+##过滤url
+IGNORE_URLS = [
+    "^/user/login"
+]
+
+IGNORE_CHECK_LOGIN_URLS = [
+    "^/static",
+    "^/favicon.ico"
+]
+
+API_IGNORE_URLS = [
+    "^/api"
+]
+# cookie名
+AUTH_COOKIE_NAME = "swt"
