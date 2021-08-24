@@ -5,33 +5,57 @@ from application import app, db
 from utils.UrlManager import UrlManager
 from decimal import Decimal
 from sqlalchemy import or_
+
 # 相关数据库调用
 from DataBaseFolder.Interface import DishBaseModify as d
 from DataBaseFolder.Interface import RestaurantBaseModify as r
 from DataBaseFolder.Interface.InterfaceHelper import *
 
+route_dishList = Blueprint('dish-list', __name__)
 
-route_dishList = Blueprint('dishList', __name__)
 
-@route_dishList.route("/index", methods=['GET'])
+@route_dishList.route("/", methods=['GET', 'POST'])
 def index():
-     resp = {'code': 200, 'message': '获取餐品列表成功', 'data': [], 'total': 0}  # 提前定义返回信息
-      req = request.values
-      if req:
-          pageNum = int(req['pageNum']) if ('page' in req and req['page']) else 1
-          pageSize = int(req['pageSize'])
-          dishList = d.PyList()
-          listNum = len(dishList)
-          pages = listNum / pageSize
-          dishList = dishList[(pageNum - 1) * pageSize:pageNum * pageSize]
-          resp['total'] = int(listNum / 3)
-          for item in dishList:
-              resp['data'].append(
-                  {
-                      "dish_id": item.DishID,
-                      "dish_name": item.DishName,
-                      "dish_class": item.DishType
+    # 获取请求结果
+    req = request.values
 
-                  }
-              )
-          return jsonify(resp)
+    # 解析参数
+    pageNum = int(req['pageNum']) if ('pageNum' in req and req['pageNum']) else 1
+    pageSize = int(req['pageSize'])
+
+    # 从数据库拉取列表信息
+    dishList = d.PyList()
+    listNum = len(dishList)
+    dishList = dishList[(pageNum - 1) * pageSize:pageNum * pageSize]
+
+    # 数据为空时查询失败
+    if listNum < 1 or pageNum > listNum:
+        lic = {
+            'code': 400,
+            'message': '请求失败,检查当前页数或者联系后台检查数据库',
+            'data': []
+        }
+        return jsonify(lic)
+
+    # 数据有效时，创建响应体
+    lic = {
+        'code': 200,
+        'message': '请求成功',
+        'data': [],
+        'total': listNum
+    }
+
+    # 加入菜品数据
+    def bedict(dataList):
+        for item in dataList:
+            lic['data'].append(
+                {
+                    "dish_id": item.DishID,
+                    "dish_name": item.DishName,
+                    "dish_class": item.DishType
+                }
+            )
+        return lic
+
+    return jsonify(bedict(dishList))
+

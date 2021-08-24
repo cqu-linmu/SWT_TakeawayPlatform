@@ -10,13 +10,30 @@ from DataBaseFolder.Interface import DishBaseModify as d
 from DataBaseFolder.Interface import RestaurantBaseModify as r
 from DataBaseFolder.Interface.InterfaceHelper import *
 
-route_dishClassList= Blueprint('dishClassList', __name__)
-# 展示分类信息
-@route_dishClassList.route("/", methods=["GET"])
-def getClass():
-    resp = {'code': 200, 'message': '获取餐品分类列表成功', 'data': []}
-    resp['data'].append({'className': '主食', 'class_value': '主食'})
-    resp['data'].append({'className': '小吃', 'class_value': '小吃'})
-    resp['data'].append({'className': '饮品', 'class_value': '饮品'})
+route_dishClassList = Blueprint('dish_class-list', __name__)
 
+
+@route_dishClassList.route('/', methods=['GET', 'POST'])
+def return_classes():
+    resp = {
+        'code': 200,
+        'message': '请求成功',
+        'data': []
+    }
+    try:
+        dishList = d.PyList()
+        classList = []
+        for item in dishList:
+            if item.DishType not in classList:
+                classList.append({
+                    'class_name': item.DishType,
+                    'class_value': item.DishType
+                })
+        resp['data'] = classList
+    except:
+        resp = {
+            'code': 400,
+            'message': '请求失败',
+            'data': []
+        }
     return jsonify(resp)
