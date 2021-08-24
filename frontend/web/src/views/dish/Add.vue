@@ -16,9 +16,9 @@
 				placeholder="请选择菜品分类">
 					<el-option
 						v-for="item in dish_classes"
-						:key="item.name"
-						:label="item.value"
-						:value="item.name">
+						:key="item.class_name"
+						:label="item.class_value"
+						:value="item.class_name">
 				    </el-option>
 			</el-select>
 		</el-form-item>
@@ -125,13 +125,13 @@
 					console.log('===============成功读取菜品分类================')
 				}
 				
-				if(route.params.dish_id) {
-					const {code,data} = await API.GetDishInfo(route.params.dish_id)
-					if(+code===200) {
-						state.model = data
-						console.log('===============成功读取菜品ID================')
-					}
-				}
+				// if(route.params.dish_id) {
+				// 	const {code,data} = await API.GetDishInfo(route.params.dish_id)
+				// 	if(+code===200) {
+				// 		state.model = data
+				// 		console.log('===============成功读取菜品ID================')
+				// 	}
+				// }
 			})
 			const submitForm = () => {
 				form.value.validate(async valid => {

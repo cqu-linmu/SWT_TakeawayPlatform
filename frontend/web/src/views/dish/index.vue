@@ -74,12 +74,15 @@ export default defineComponent({
 		}
     }
     //删除菜品
-    const deleteDish = dish_id => {
+    const deleteDish = dish_id_temp => {
       ctx
         .$confirm('是否确认删除？')
         .then(async () => {
           const $loading = ctx.$loading()
-          const { code } = await API.deleteDish(dish_id)
+		  let data = {
+			  dish_id:dish_id_temp,
+		  }
+          const { code } = await API.deleteDish(data)
           $loading.close()
           if (+code === 200) {
             ctx.$message.success('删除成功')

@@ -18,7 +18,8 @@ db = SQLAlchemy(app)
 manager = Manager(app)
 
 route_index = Blueprint( 'index_page',__name__ )
-@route_index.route("/")
+
+@route_index.route("/api")
 def index():
     return "SWT"
 

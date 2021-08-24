@@ -32,16 +32,16 @@ import error from './modules/error'
 import login from './modules/login'
 import lock from './modules/lock'
 import home from './modules/home'
-import test from './modules/test'
 import dish from './modules/dish.js'
 import order from './modules/order.js'
 import statistics from './modules/statistics.js'
+// import test from './modules/test'
 
 /* 菜单栏的路由 */
 // 固定菜单
 export const fixedRoutes = [...home, ...dish, ...order, ...statistics]
-// 动态菜单
-export const asyncRoutes = [...test]
+// // 动态菜单
+// export const asyncRoutes = [...test]
 
 const router = createRouter({
   history: createWebHashHistory(),

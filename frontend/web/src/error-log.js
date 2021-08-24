@@ -28,7 +28,7 @@ import store from '@/store'
 //   - import.meta.env.PROD 布尔值，代表生产环境
 
 // const flag =  import.meta.env.PROD  // 生产环境才进行错误监控
-const flag = true // 为了演示，默认开启错误监控。如果你的项目不需要错误监控，请设为false
+const flag = false // 为了演示，默认开启错误监控。如果你的项目不需要错误监控，请设为false
 
 export default app => {
   if (flag) {

@@ -9,13 +9,13 @@
  * @Github: https://github.com/huzhushan/vue3-element-admin
  * @Donate: https://huzhushan.gitee.io/vue3-element-admin/donate/
  */
-import request from '@/utils/request'
+// import request from '@/utils/request'
 
-// 获取菜单
-export const GetMenus = params => {
-  return request({
-    url: '/api/menus',
-    method: 'get',
-    params,
-  })
-}
+// // 获取菜单
+// export const GetMenus = params => {
+//   return request({
+//     url: '/api/menus',
+//     method: 'get',
+//     params,
+//   })
+// }
