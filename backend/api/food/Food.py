@@ -13,7 +13,7 @@ from DataBaseFolder.Interface.InterfaceHelper import *
 route_food = Blueprint('food_page', __name__)
 
 
-# 餐品管理首页显示
+# 餐品管理接口 [接口3]
 @route_food.route("/index", methods=['POST'])
 def index():
     req = request.values
@@ -24,7 +24,6 @@ def index():
     pageNum = listNum / page_size
     dishList = dishList[(page - 1) * page_size:page * page_size]
     lic = []
-    lic.append({"pageNum": pageNum})
 
     def bedict(dataList):
         for item in dataList:
@@ -41,7 +40,7 @@ def index():
     return jsonify(bedict(dishList))
 
 
-# 餐品编辑
+# 餐品编辑接口 [接口5]
 @route_food.route("/set", methods=['POST'])
 def set():
     resp = {'code': 1, 'msg': '编辑成功', 'data': {}}  # 提前定义返回信息
@@ -53,17 +52,11 @@ def set():
     dish_price = req['dish_price'] if 'dish_price' in req else ''  # 菜品价格
     dish_description = req['dish_description'] if 'dish_description' in req else ''  # 菜品描述
 
-    # 检查菜品分类是否合理
-    if dish_class is None or len(dish_class) < 1:
-        resp['code'] = 0
-        resp['msg'] = "请输入符合规范的分类~~"
-        return jsonify(resp)
-
-    # 检查菜品名是否合理
-    if dish_name is None or len(dish_name) < 1:
-        resp['code'] = 0
-        resp['msg'] = "请输入符合规范的名称~~"
-        return jsonify(resp)
+    ## 检查菜品名是否合理【已请求过了分类，没有必要】
+    #if dish_name is None or len(dish_name) < 1:
+    #    resp['code'] = 0
+    #    resp['msg'] = "请输入符合规范的名称~~"
+    #    return jsonify(resp)
 
     # 检查菜品价格是否合理
     if not dish_price or len(dish_price) < 1:
@@ -103,7 +96,7 @@ def set():
     return jsonify(resp)
 
 
-# 餐品的删除
+# 餐品删除接口
 @route_food.route("/ops", methods=["POST"])
 def ops():
     resp = {'code': 1, 'msg': '编辑成功', 'data': {}}

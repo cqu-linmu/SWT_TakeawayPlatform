@@ -7,16 +7,17 @@ import json
 route_stat = Blueprint('stat_page', __name__)
 app.register_blueprint(route_stat, url_prefix="/stat")
 
+# 单品销量统计接口 [接口11]
 @route_stat.route("/index",methods=['GET', 'POST'])
 def index():
   
     req = request.values
     page = int(req['page']) if ('page' in req and req['page']) else 1
     page_size=int(req['pageSize']) if ('pageSize' in req and req['pageSize']) else 1
-    list=d.PyList()
-    listNum=len(list)
+    dishList=d.PyList()
+    listNum=len(dishList)
     pageNum=listNum/page_size
-    list=list[(page-1)*page_size:page*page_size]
+    dishList=dishList[(page-1)*page_size:page*page_size]
     lic = []
     lic.append({"pageNum":pageNum})
     def bedict(a):
@@ -30,7 +31,7 @@ def index():
                 }
             )
         return lic
-    return jsonify(bedict(list) )
+    return jsonify(bedict(dishList) )
     
 
 

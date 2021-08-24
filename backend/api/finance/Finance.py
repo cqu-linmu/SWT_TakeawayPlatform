@@ -9,33 +9,34 @@ import json
 route_finance = Blueprint('finance_page', __name__)
 
 
-# 财务管理页面
+# 财务管理页面接口 [接口7]
 @route_finance.route("/index", methods=['POST'])
 def index():
     req = request.values
     page = int(req['page']) if ('page' in req and req['page']) else 1
     
     page_size = int(req['pageSize'])
-    list =o.PyList()
-    listNum=len(list)
+    orderList =o.PyList()
+    listNum=len(orderList)
     pageNum=listNum/page_size
-    list=list[(page-1)*page_size:page*page_size]
+    orderList=orderList[(page-1)*page_size:page*page_size]
     lic = []
-    lic.append({"pageNum":pageNum})
+    
     def bedict(a):
-        
         for item in a:
             lic.append(
                 {
+                    "order_dish": item.Dishes,
                     "order_id": item.OrderID,
-                    "order_status": item.OrderStatus,
                     "order_price": item.Price,
-                    "order_dish": item.Dishes
+                    "order_time": item.OrderTime,
+                    "order_status": item.OrderStatus
                 }
             )
         return lic
-    #返回总页数和page页的订单信息
-    return jsonify(bedict(list))  
+    
+    # 不用返回总页数
+    return jsonify(bedict(orderList))  
     
 
 # 订单详情
@@ -65,13 +66,13 @@ def info():
     return jsonify(resp_data)
 
 
-# 点击确认发货按钮，将订单状态改为“待收货”
+# 订单编辑接口 [接口8]
 @route_finance.route("/ops", methods=["POST"])
 def orderOps():
     resp = {'code': 0, 'msg': '订单状态修改成功', 'data': {}}
     req = request.values
     order_id = req['order_id'] if 'order_id' in req else 0
-    order_statut = req['order_statut'] if 'order_statut' in req else 0
+    order_status = req['order_status'] if 'order_status' in req else 0
     act = req['act']
 
     pay_order_info = Order.query.filter_by(id=order_id).first()

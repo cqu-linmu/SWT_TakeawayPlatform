@@ -10,7 +10,7 @@ from DataBaseFolder.Interface.UserBaseModify import *  # 导入数据库修改�
 route_user = Blueprint('user_page', __name__)
 
 
-# 用户登录
+# 用户登录接口  [接口1]
 @route_user.route("/login", methods=["GET", "POST"])
 def login():
 
@@ -19,8 +19,8 @@ def login():
     req = request.values  # 前端传来的信息
 
     # 接口中使用的变量
-    login_name = req['login_name'] if 'login_name' in req else ''
-    login_pwd = req['login_pwd'] if 'login_pwd' in req else ''
+    login_name = req['userName'] if 'userName' in req else ''
+    login_pwd = req['password'] if 'password' in req else ''
 
     # 用户登录验证
     if login_name is None or len(login_name) < 1:  # 用户名未输入或太短
