@@ -9,16 +9,18 @@ route_dishSaleList = Blueprint('dishSaleList', __name__)
 
 
 
-@route_dishSaleList.route("/index",methods=['GET', 'POST'])
+@route_dishSaleList.route("/",methods=['GET'])
 def index():
-  
     req = request.values
-    page = int(req['page']) if ('page' in req and req['page']) else 1
+    resp = {'code': 200, 'msg': '获取餐品列表成功', 'data': {}, 'total': 0}
+    pageNum = int(req['page']) if ('page' in req and req['page']) else 1
     page_size=int(req['pageSize']) if ('pageSize' in req and req['pageSize']) else 1
     dishList=d.PyList()
-    listNum=len(dishList)
-    pageNum=listNum/page_size
-    dishList=dishList[(page-1)*page_size:page*page_size]
+    totalList =len(dishList)
+    if pageNum==-1:#当pageNum=-1时，返回所有订单
+        dishList=dishList
+    else:
+        dishList=dishList[(pageNum-1)*page_size:pageNum*page_size]
     lic = []
     lic.append({"pageNum":pageNum})
     def bedict(a):
@@ -32,4 +34,6 @@ def index():
                 }
             )
         return lic
-    return jsonify(bedict(dishList) )
+    resp['data']= bedict(dishList)
+    resp['total']=totalList
+    return jsonify(resp)
