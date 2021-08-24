@@ -2,4 +2,4 @@
 
 
 
-route_saledaily = Blueprint('saledaily', __name__)
+route_saledaily = Blueprint('dish-Sale-list', __name__)

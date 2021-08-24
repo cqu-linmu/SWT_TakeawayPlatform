@@ -10,4 +10,4 @@ from DataBaseFolder.Interface import DishBaseModify as d
 from DataBaseFolder.Interface import RestaurantBaseModify as r
 from DataBaseFolder.Interface.InterfaceHelper import *
 
-route_dishClassList= Blueprint('dishClassList', __name__)
+route_dishClassList= Blueprint('dish_class-list', __name__)
