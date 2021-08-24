@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
+import random
+import json
 from flask import Blueprint, request, jsonify, make_response, g, redirect
 from utils.user.UserService import (UserService)  # UserService：封装用户登录相关的方法
-from utils.Helper import (ops_render)  # ops_render:渲染页面
-from utils.UrlManager import (UrlManager)  # UrlManager：统一封装生成各种url的方法
 from application import app, db
-import json
+
 from DataBaseFolder.Interface.UserBaseModify import *  # 导入数据库修改接口
 
 route_login = Blueprint('login', __name__)

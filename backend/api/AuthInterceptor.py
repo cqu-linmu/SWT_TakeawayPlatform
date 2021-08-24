@@ -14,7 +14,7 @@ def before_request():
     ignore_check_login_urls = app.config['IGNORE_CHECK_LOGIN_URLS']
     path = request.path
 
-    app.logger.info
+    # var = app.logger.info
     # 如果是静态文件就不要查询用户信息了
     pattern = re.compile('%s' % "|".join(ignore_check_login_urls))
     if pattern.match(path):
@@ -40,6 +40,7 @@ def before_request():
 判断用户是否已经登录
 '''
 
+
 def check_login():
     cookies = request.cookies
     auth_cookie = cookies[app.config['AUTH_COOKIE_NAME']] if app.config['AUTH_COOKIE_NAME'] in cookies else None
@@ -60,6 +61,5 @@ def check_login():
 
     if auth_info[0] != UserService.geneAuthCode(user_info):
         return False
-
 
     return user_info
