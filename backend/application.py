@@ -17,10 +17,12 @@ CORS(app, resources={r'/*': {'origins': '*'}})
 db = SQLAlchemy(app)
 manager = Manager(app)
 
-route_index = Blueprint( 'index_page',__name__ )
+route_index = Blueprint('api', __name__)
+
 
 @route_index.route("/api")
 def index():
     return "SWT"
+
 
 app.register_blueprint(route_index, url_prefix="/")

@@ -9,10 +9,10 @@ from DataBaseFolder.Interface.UserBaseModify import *  # 导入数据库修改�
 
 route_login = Blueprint('login', __name__)
 
+
 # 用户登录接口  [接口1]
 @route_login.route("/login", methods=["GET", "POST"])
 def login():
-
     # 当请求为POST
     resp = {'code': 1, 'msg': '登录成功', 'data': {}}  # 返回信息
     req = request.values  # 前端传来的信息

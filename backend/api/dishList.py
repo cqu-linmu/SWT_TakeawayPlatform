@@ -21,12 +21,12 @@ def index():
 
     # 解析参数
     pageNum = int(req['pageNum']) if ('pageNum' in req and req['pageNum']) else 1
-    page_size = int(req['pageSize'])
+    pageSize = int(req['pageSize'])
 
     # 从数据库拉取列表信息
     dishList = d.PyList()
     listNum = len(dishList)
-    dishList = dishList[(pageNum - 1) * page_size:pageNum * page_size]
+    dishList = dishList[(pageNum - 1) * pageSize:pageNum * pageSize]
 
     # 数据为空时查询失败
     if listNum < 1 or pageNum > listNum:

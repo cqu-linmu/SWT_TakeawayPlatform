@@ -6,11 +6,11 @@ from utils.UrlManager import UrlManager
 from application import app, db
 import json
 
-route_orderList = Blueprint('orderList', __name__)
+route_orderList = Blueprint('order-list', __name__)
 
 
 # 订单管理页面接口 [接口7]
-@route_orderList.route("/", methods=['GET'])
+@route_orderList.route("/", methods=['GET', 'POST'])
 def index():
     resp = {'code': 200, 'msg': '获取订单列表成功', 'data': {}, 'total': 0}
     req = request.values

@@ -7,11 +7,11 @@ from utils.UrlManager import UrlManager
 from application import app, db
 import json
 
-route_order = Blueprint('route_order', __name__)
+route_order = Blueprint('order', __name__)
 
 
 # 订单编辑接口 [接口8]
-@route_order.route("/edit", methods=["POST"])
+@route_order.route("/edit", methods=["GET", "POST"])
 def edit():
     resp = {'code': 200, 'msg': '订单状态修改成功', 'data': {}}
     req = request.values
@@ -33,7 +33,7 @@ def edit():
 
 # 订单删除接口
 
-@route_order.route("/", methods=["DELETE"])
+@route_order.route("/", methods=["GET", "POST"])
 def delete():
     resp = {'code': 200, 'msg': '删除成功', 'data': {}}
     req = request.values
