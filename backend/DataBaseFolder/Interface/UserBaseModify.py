@@ -1,4 +1,3 @@
-from flask import Blueprint, jsonify
 from DataBaseFolder.Models.UserModels.UserBaseInfo import User
 from DataBaseFolder.DataBase import db
 
@@ -35,7 +34,7 @@ def PyAdd(username, pwd,Gender='未知',headportrait='NeedInit',address='NeedIni
     userinfo.SetPassword(pwd)
     db.session.add(userinfo)
     db.session.commit()
-    return jsonify("ADD_SUCCESS")
+    return userinfo
 
 '''
 @user.route('/list')
