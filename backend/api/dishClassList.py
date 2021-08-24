@@ -11,3 +11,12 @@ from DataBaseFolder.Interface import RestaurantBaseModify as r
 from DataBaseFolder.Interface.InterfaceHelper import *
 
 route_dishClassList= Blueprint('dishClassList', __name__)
+# 展示分类信息
+@route_dishClassList.route("/", methods=["GET"])
+def getClass():
+    resp = {'code': 200, 'message': '获取餐品分类列表成功', 'data': []}
+    resp['data'].append({'className': '主食', 'class_value': '主食'})
+    resp['data'].append({'className': '小吃', 'class_value': '小吃'})
+    resp['data'].append({'className': '饮品', 'class_value': '饮品'})
+
+    return jsonify(resp)
