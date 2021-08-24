@@ -5,11 +5,12 @@ from utils.Helper import *
 from utils.UrlManager import UrlManager
 from application import app, db
 import json
-route_orderList= Blueprint('orderList', __name__)
+
+route_orderList= Blueprint('order-list', __name__)
 
 
 # 订单详情页面接口 [接口7]
-@route_orderList.route("/index", methods=['POST'])
+@route_orderList.route("/", methods=['POST'])
 def index():
     req = request.values
     page = int(req['page']) if ('page' in req and req['page']) else 1

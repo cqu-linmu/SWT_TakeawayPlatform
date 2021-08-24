@@ -10,7 +10,7 @@ from DataBaseFolder.Interface import DishBaseModify as d
 from DataBaseFolder.Interface import RestaurantBaseModify as r
 from DataBaseFolder.Interface.InterfaceHelper import *
 
-route_dish = Blueprint('finance_page', __name__)
+route_dish = Blueprint('dish', __name__)
 
 
 # 餐品删除接口

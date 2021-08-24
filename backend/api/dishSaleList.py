@@ -5,11 +5,11 @@ from utils.Helper import *
 from application import app, db
 import json
 
-route_dishSaleList = Blueprint('dishSaleList', __name__)
+route_dishSaleList = Blueprint('dish-Sale-list', __name__)
 
 
 
-@route_dishSaleList.route("/index",methods=['GET', 'POST'])
+@route_dishSaleList.route("/",methods=['GET', 'POST'])
 def index():
   
     req = request.values

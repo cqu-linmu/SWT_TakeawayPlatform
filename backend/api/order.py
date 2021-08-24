@@ -6,11 +6,11 @@ from utils.Helper import *
 from utils.UrlManager import UrlManager
 from application import app, db
 import json
-route_order = Blueprint('route_order', __name__)
+route_order = Blueprint('order', __name__)
 
 
 # 订单编辑接口 [接口8]
-@route_order.route("/", methods=["POST"])
+@route_order.route("/edit", methods=["POST"])
 def orderOps():
     resp = {'code': 0, 'msg': '订单状态修改成功', 'data': {}}
     req = request.values

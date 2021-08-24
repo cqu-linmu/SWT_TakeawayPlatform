@@ -1,1 +1,1 @@
-route_finance = Blueprint('finance_page', __name__)
+route_userInfo = Blueprint('userinfo', __name__)

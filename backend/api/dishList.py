@@ -11,9 +11,9 @@ from DataBaseFolder.Interface import RestaurantBaseModify as r
 from DataBaseFolder.Interface.InterfaceHelper import *
 
 
-route_dishList = Blueprint('dishList', __name__)
+route_dishList = Blueprint('dish-list', __name__)
 
-@route_dishList.route("/index", methods=['GET'])
+@route_dishList.route("/", methods=['GET'])
 def index():
     
     req = request.values
