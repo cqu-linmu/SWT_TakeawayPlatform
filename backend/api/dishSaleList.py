@@ -4,11 +4,12 @@ from DataBaseFolder.Interface import DishBaseModify as d
 from utils.Helper import *
 from application import app, db
 import json
-route_stat = Blueprint('stat_page', __name__)
-app.register_blueprint(route_stat, url_prefix="/stat")
 
-# 单品销量统计接口 [接口11]
-@route_stat.route("/index",methods=['GET', 'POST'])
+route_dishSaleList = Blueprint('dishSaleList', __name__)
+
+
+
+@route_dishSaleList.route("/index",methods=['GET', 'POST'])
 def index():
   
     req = request.values
@@ -32,7 +33,3 @@ def index():
             )
         return lic
     return jsonify(bedict(dishList) )
-    
-
-
-    

@@ -21,7 +21,7 @@ app.register_blueprint( route_dish,url_prefix = "/dish" ) # func: add(/add); del
 
 app.register_blueprint( route_orderList,url_prefix = "/order-list" )
 # to fix
-app.register_blueprint( route_order,url_prefix = "/order" )# func: edit(); delete(/)
+app.register_blueprint( route_order,url_prefix = "/order" ) # func: edit(); delete(/)
 
 app.register_blueprint( route_saledaily,url_prefix = "/sale-daily" )
 

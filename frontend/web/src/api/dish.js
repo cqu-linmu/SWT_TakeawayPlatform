@@ -28,7 +28,7 @@ export const addDish = data => {
   return request({
     url: '/api/dish/add/',
     method: 'get',
-	params: data,
+    params: data,
   })
 }
 // 修改餐品 => 菜品编辑
@@ -36,7 +36,7 @@ export const editDish = data => {
   return request({
     url: `/api/dish/edit/${data.dish_id}`,
     method: 'get',
-	params: data,
+    params: data,
   })
 }
 
@@ -45,7 +45,7 @@ export const deleteDish = data => {
   return request({
     url: `/api/dish/${data.dish_id}`,
     method: 'get',
-	params: data,
+    params: data,
   })
 }
 // 获取餐品分类列表 => 获取餐品分类
