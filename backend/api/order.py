@@ -13,15 +13,16 @@ route_order = Blueprint('order', __name__)
 # 订单编辑接口 [接口8]
 @route_order.route("/edit", methods=["GET", "POST"])
 def edit():
-    resp = {'code': 200, 'msg': '订单状态修改成功', 'data': {}}
+    resp = {'code': 200, 'message': '订单状态修改成功', 'data': {}}
     req = request.values
     order_id = req['order_id'] if 'order_id' in req else 0
     order_status = req['order_status'] if 'order_status' in req else 0
 
-    pay_order_info = Order.query.filter_by(id=order_id).first()
+    pay_order_info = o.PyFind_OrderID(order_id)
+
     if not pay_order_info:
         resp['code'] = 1
-        resp['msg'] = "订单状态修改失败，请联系用户支持"
+        resp['message'] = "订单状态修改失败，请联系用户支持"
         return jsonify(resp)
 
     pay_order_info.OrderStatus = order_status
@@ -44,4 +45,3 @@ def delete():
         resp['msg'] = '删除失败'
 
     return jsonify(resp)
-

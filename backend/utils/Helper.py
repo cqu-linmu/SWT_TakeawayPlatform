@@ -12,7 +12,8 @@ token_check:token检查（已弃用）
 from flask import g, render_template
 import datetime
 from utils.UrlManager import *
-from  DataBaseFolder.Models.UserModels.UserBaseInfo import User
+from DataBaseFolder.Models.UserModels.UserBaseInfo import User
+
 
 # 自定义分页类
 def iPagination(params):

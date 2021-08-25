@@ -19,15 +19,15 @@ export const getOrderList = data => {
 // 删除订单
 export const deleteOrder = data => {
   return request({
-    url: `/api/order/${data.order_id}`,
+    url: `/api/order`,
     method: 'get',
-	params: data
+    params: data
   })
 }
 // 修改订单 => 订单编辑
 export const editOrder = data => {
   return request({
-    url: `/api/order/edit/${data.order_id}`,
+    url: `/api/order/edit`,
     method: 'get',
     params: data,
   })

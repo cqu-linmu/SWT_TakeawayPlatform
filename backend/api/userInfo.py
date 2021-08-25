@@ -1,4 +1,6 @@
-from flask import Blueprint, request, jsonify, redirect
+import json
+
+from flask import Blueprint, request, jsonify, redirect, make_response
 from utils.Helper import ops_render, getCurrentDate, iPagination, getDictFilterField
 from application import app, db
 from utils.UrlManager import UrlManager
@@ -10,13 +12,16 @@ from DataBaseFolder.Interface import RestaurantBaseModify as r
 route_userInfo = Blueprint('userinfo', __name__)
 
 
-@route_userInfo.route('/', methods=["GET", "POST"])
+@route_userInfo.route('/', methods=["GET"])
 def userInfo():
     userItem = r.PyFind_ID(1)
-    resp = {'code': 200, 'message': '获取用户信息成功', 'data': {
-        'id': 1,
-        'name': userItem.RestaurantName,
-        'role': 'admin',
-        'avatar': userItem.HeadPortrait
-    }}  # 提前定义返回信息
-    return jsonify(resp)
+    response = make_response(
+        json.dumps({'code': 200,
+                    'data': {
+                        'id': 1,
+                        'name': userItem.RestaurantName,
+                        'role': 'visitor',
+                        'avatar': userItem.HeadPortrait
+                    }}))
+
+    return response

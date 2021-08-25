@@ -19,15 +19,15 @@ def saleDaily():
 
     # 计算起始时间点
     stDate = (edDate - timedelta(days=30))
-    if stDate < o.PyFind_OrderID(1).OrderTime:
-        stDate = o.PyFind_OrderID(1).OrderTime
+    if stDate < o.PyFind_OrderID(2).OrderTime:
+        stDate = o.PyFind_OrderID(2).OrderTime
 
     stDateStr = str(stDate.year) + '-' + str(stDate.month) + '-' + str(stDate.day)
     edDateStr = str(edDate.year) + '-' + str(edDate.month) + '-' + str(edDate.day)
 
     if stDateStr == edDateStr:
         resp['data'].append({
-            'sale-daily': 0,
+            'sale_daily': 0,
             'order_time': str(stDate.year) + '-' + str(stDate.month) + '-' + str(stDate.day)
         })
         for order in orders:
@@ -50,7 +50,7 @@ def saleDaily():
             elif order.OrderTime > deltaDate:
                 # 如果日期超出，则记录昨天的数据，同时更新前后区间；更新当天营业额
                 resp['data'].append({
-                    'sale-daily': tmpSumBenefit,
+                    'sale_daily': tmpSumBenefit,
                     'order_time': str(stDate.year) + '-' + str(stDate.month) + '-' + str(stDate.day)
                 })
                 stDate = order.OrderTime
@@ -59,7 +59,7 @@ def saleDaily():
 
         # 记录最后一天的营业额
         resp['data'].append({
-            'sale-daily': tmpSumBenefit,
+            'sale_daily': tmpSumBenefit,
             'order_time': str(stDate.year) + '-' + str(stDate.month) + '-' + str(stDate.day)
         })
     return jsonify(resp)

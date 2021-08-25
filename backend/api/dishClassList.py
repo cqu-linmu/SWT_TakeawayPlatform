@@ -20,20 +20,15 @@ def return_classes():
         'message': '请求成功',
         'data': []
     }
-    try:
-        dishList = d.PyList()
-        classList = []
-        for item in dishList:
-            if item.DishType not in classList:
-                classList.append({
-                    'class_name': item.DishType,
-                    'class_value': item.DishType
-                })
-        resp['data'] = classList
-    except:
-        resp = {
-            'code': 400,
-            'message': '请求失败',
-            'data': []
-        }
+    dishList = d.PyList()
+    classList = []
+    for item in dishList:
+        classList.append(item.DishType)
+    classList = list(set(classList))
+
+    for dishClass in classList:
+        resp['data'].append({
+            'class_name': dishClass,
+            'class_value': dishClass
+        })
     return jsonify(resp)
