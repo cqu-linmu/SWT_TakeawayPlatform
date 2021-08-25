@@ -11,7 +11,7 @@ SQLALCHEMY_ENCODING = "utf8"
 
 ##过滤url
 IGNORE_URLS = [
-    "^/user/login"
+    "^/api/login"
 ]
 
 IGNORE_CHECK_LOGIN_URLS = [
@@ -19,8 +19,5 @@ IGNORE_CHECK_LOGIN_URLS = [
     "^/favicon.ico"
 ]
 
-API_IGNORE_URLS = [
-    "^/api"
-]
 # cookie名
 AUTH_COOKIE_NAME = "swt"
