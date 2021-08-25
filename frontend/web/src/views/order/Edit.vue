@@ -75,7 +75,11 @@
 				],
 			})
 			const submitForm = async params => {
-				const { code, message } = await API.editOrder(state)
+				let data={
+					order_id: route.params.order_id ,
+					order_status: state.model.order_status ,
+				}
+				const { code, message } = await API.editOrder(data)
 				if (+code===200) {
 					ctx.$message.success(message)
 					store.dispatch('tags/delTag', route)

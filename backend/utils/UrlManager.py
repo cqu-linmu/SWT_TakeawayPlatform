@@ -7,7 +7,7 @@ buildImageUrl：生成上传图片的存放地址，传入path，生成图片存
 """
 
 import time
-from application import  app
+from application import app
 
 
 class UrlManager(object):
@@ -16,20 +16,20 @@ class UrlManager(object):
 
     # 生成url
     @staticmethod
-    def buildUrl( path ):
+    def buildUrl(path):
         return path
 
     # 生成静态地址
     @staticmethod
     def buildStaticUrl(path):
-        release_version = app.config.get( 'RELEASE_VERSION' )
-        ver = "%s"%( int( time.time() ) ) if not release_version else release_version
-        path =  "/static" + path + "?ver=" + ver
-        return UrlManager.buildUrl( path )
+        release_version = app.config.get('RELEASE_VERSION')
+        ver = "%s" % (int(time.time())) if not release_version else release_version
+        path = "/static" + path + "?ver=" + ver
+        return UrlManager.buildUrl(path)
 
     # 生成图片上传后存放的地址
     @staticmethod
-    def buildImageUrl( path ):
+    def buildImageUrl(path):
         app_config = app.config['APP']
         url = app_config['domain'] + app.config['UPLOAD']['prefix_url'] + path
         return url

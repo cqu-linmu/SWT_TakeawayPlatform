@@ -21,10 +21,14 @@
  * @Donate: https://huzhushan.gitee.io/vue3-element-admin/donate/
  */
 
-import { defineConfig } from 'vite'
+import {
+  defineConfig
+} from 'vite'
 import vue from '@vitejs/plugin-vue'
 import path from 'path'
-import { viteMockServe } from 'vite-plugin-mock'
+import {
+  viteMockServe
+} from 'vite-plugin-mock'
 import viteSvgIcons from 'vite-plugin-svg-icons'
 import viteESLint from '@ehutch79/vite-eslint'
 
@@ -74,7 +78,7 @@ export default env => {
       open: true,
       proxy: {
         '/api': {
-          target: 'http://dev.api.xxx.com', // 后端接口的域名
+          target: 'http://192.168.1.206:5111', // 后端接口的域名
           changeOrigin: true,
         },
       },

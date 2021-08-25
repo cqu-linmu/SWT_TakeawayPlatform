@@ -12,7 +12,7 @@ DEBUG = True
 app = Flask(__name__)
 app.config.from_object(DataBaseConfig)
 
-CORS(app, resources={r'/*': {'origins': '*'}})
+CORS(app, resources={r'/*': {'origins': '*', 'supports_credentials': True, 'Access-Control-Allow-Origin': '*'}})
 
 db = SQLAlchemy(app)
 manager = Manager(app)
@@ -20,7 +20,7 @@ manager = Manager(app)
 route_index = Blueprint('api', __name__)
 
 
-@route_index.route("/api")
+@route_index.route("/")
 def index():
     return "SWT"
 

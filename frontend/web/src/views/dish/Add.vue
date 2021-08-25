@@ -12,7 +12,7 @@
 		
 		<el-form-item label="菜品分类">
 			<el-select 
-				v-model.trim="model.dish_class" 
+				v-model="model.dish_class" 
 				placeholder="请选择菜品分类">
 					<el-option
 						v-for="item in dish_classes"
