@@ -1,18 +1,21 @@
 from flask import Blueprint, request, jsonify, redirect
 from DataBaseFolder.Models.OrderData.OrderBase import Order
 from DataBaseFolder.Interface import OrderBaseModify as o
-from DataBaseFolder.Interface import InterfaceHelper as interfecehelper
 from utils.Helper import *
 from utils.UrlManager import UrlManager
 from application import app, db
 import json
 
+# 相关数据库调用
+from DataBaseFolder.Interface import InterfaceHelper as interfecehelper
+
 route_order = Blueprint('order', __name__)
 
-
-# 订单编辑接口 [接口8]
 @route_order.route("/edit", methods=["GET", "POST"])
 def edit():
+    '''
+    订单编辑接口
+    '''
     resp = {'code': 200, 'message': '订单状态修改成功', 'data': {}}
     req = request.values
     order_id = req['order_id'] if 'order_id' in req else 0

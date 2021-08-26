@@ -12,10 +12,11 @@ from DataBaseFolder.Interface.InterfaceHelper import *
 
 route_dish = Blueprint('dish', __name__)
 
-
-# 餐品删除接口
 @route_dish.route("/", methods=["GET", "POST"])
 def delDish():
+    '''
+    餐品删除接口
+    '''
     resp = {'code': 200, 'message': '删除成功', 'data': {}}
     req = request.values
     dish_id = req['dish_id'] if 'dish_id' in req else ''

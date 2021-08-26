@@ -5,14 +5,16 @@ from flask import Blueprint, request, jsonify, make_response, g, redirect
 from utils.user.UserService import (UserService)  # UserService：封装用户登录相关的方法
 from application import app, db
 
-from DataBaseFolder.Interface.UserBaseModify import *  # 导入数据库修改接口
+# 相关数据库调用
+from DataBaseFolder.Interface.UserBaseModify import * 
 
 route_login = Blueprint('login', __name__)
 
-
-# 用户登录接口  [接口1]
 @route_login.route("", methods=["GET", "POST"])
 def login():
+    '''
+    用户登录接口
+    '''
     # 当请求为POST
     resp = {'code': 200, 'message': '登录成功', 'data': {}}  # 返回信息
 

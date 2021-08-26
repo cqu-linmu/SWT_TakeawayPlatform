@@ -12,9 +12,11 @@ from DataBaseFolder.Interface.InterfaceHelper import *
 
 route_dishClassList = Blueprint('dish_class-list', __name__)
 
-
 @route_dishClassList.route('/', methods=['GET', 'POST'])
 def return_classes():
+    '''
+    菜品分类信息接口
+    '''
     resp = {
         'code': 200,
         'message': '请求成功',

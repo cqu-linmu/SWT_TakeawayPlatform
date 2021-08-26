@@ -1,12 +1,16 @@
 from datetime import datetime, timedelta
 from flask import Blueprint, request, jsonify
+
+# 相关数据库调用
 import DataBaseFolder.Interface.OrderBaseModify as o
 
 route_saledaily = Blueprint('sale-daily', __name__)
 
-
 @route_saledaily.route('/', methods=["GET", "POST"])
 def saleDaily():
+    '''
+    每日流水接口
+    '''
     resp = {'code': 200, 'message': '获取每日流水成功', 'data': []}  # 提前定义返回信息
     stTime = request.values['order_time_st']
 

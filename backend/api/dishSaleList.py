@@ -1,15 +1,19 @@
 from flask import Blueprint, request, jsonify, make_response, g, redirect
 from DataBaseFolder.Models.RestaurantModels.DishBase import Dish
-from DataBaseFolder.Interface import DishBaseModify as d
 from utils.Helper import *
 from application import app, db
 import json
 
-route_dishSaleList = Blueprint('dish-Sale-list', __name__)
+# 相关数据库调用
+from DataBaseFolder.Interface import DishBaseModify as d
 
+route_dishSaleList = Blueprint('dish-Sale-list', __name__)
 
 @route_dishSaleList.route("/", methods=['GET', 'POST'])
 def index():
+    '''
+    餐品销售情况列表接口
+    '''
     req = request.values
     resp = {'code': 200, 'msg': '获取餐品列表成功', 'data': {}, 'total': 0}
     pageNum = int(req['pageNum']) if ('pageNum' in req and req['pageNum']) else 1
@@ -18,7 +22,7 @@ def index():
     totalList = len(dishList)
     if pageNum == -1:  # 当pageNum=-1时，返回所有订单
         dishList = dishList
-    else:
+    else: # 否则返回对应页面的订单
         dishList = dishList[(pageNum - 1) * page_size:pageNum * page_size]
 
     def bedict(a):

@@ -10,6 +10,9 @@ import re
 
 @app.before_request
 def before_request():
+    '''
+    请求前验证模块
+    '''
     ignore_urls = app.config['IGNORE_URLS']
     ignore_check_login_urls = app.config['IGNORE_CHECK_LOGIN_URLS']
     path = request.path
@@ -20,28 +23,22 @@ def before_request():
     if pattern.match(path):
         return
 
+    # 查询用户信息
     user_info = check_login()
-
     app.logger.info(user_info)
-
     g.current_user = None
-
     if user_info:
         g.current_user = user_info
-
     pattern = re.compile('%s' % "|".join(ignore_urls))
+
     if pattern.match(path):
         return
-
     return
 
-
-'''
-判断用户是否已经登录
-'''
-
-
 def check_login():
+    '''
+    判断用户是否已经登录
+    '''
     cookies = request.cookies
     auth_cookie = cookies[app.config['AUTH_COOKIE_NAME']] if app.config['AUTH_COOKIE_NAME'] in cookies else None
     if auth_cookie is None:

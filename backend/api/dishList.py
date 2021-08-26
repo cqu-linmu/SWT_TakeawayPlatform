@@ -13,9 +13,11 @@ from DataBaseFolder.Interface.InterfaceHelper import *
 
 route_dishList = Blueprint('dish-list', __name__)
 
-
 @route_dishList.route("/", methods=['GET', 'POST'])
 def index():
+    '''
+    菜品列表接口
+    '''
     # 获取请求结果
     req = request.values
 
