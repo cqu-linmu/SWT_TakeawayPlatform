@@ -8,7 +8,7 @@
   },
   "scripts": {
     "start": "npm run dev:mock --port 8080",
-    "dev": "vite",
+    "dev": "vite --port 8080",
     "dev:mock": "vite --mode mock",
     "build": "vite build ",
     "build:mock": "vite build --mode mock ",
@@ -20,9 +20,11 @@
     "last 2 versions"
   ],
   "dependencies": {
+    "@types/vuelidate": "^0.7.15",
     "axios": "^0.21.1",
     "echarts": "^5.1.2",
     "vue": "^3.0.5",
+    "vue-avatar": "^2.3.3",
     "vue-router": "^4.0.5",
     "vuex": "^4.0.0"
   },

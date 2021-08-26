@@ -28,7 +28,7 @@ def index():
                 {
                     "dish_id": item.DishID,
                     "dish_name": item.DishName,
-                    "dish.price": item.Price,
+                    "dish_price": item.Price,
                     "dish_number": item.Sold,
                     "dish_score": item.Score
                 }
