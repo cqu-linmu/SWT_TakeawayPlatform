@@ -5,11 +5,13 @@ from flask import Blueprint, request, jsonify, make_response, g, redirect
 from utils.user.UserService import (UserService)  # UserService：封装用户登录相关的方法
 from application import app, db
 
-# 相关数据库调用
-from DataBaseFolder.Interface.UserBaseModify import * 
+import DataBaseFolder.Interface.UserBaseModify as U  # 导入数据库修改接口
+import DataBaseFolder.Interface.RestaurantBaseModify as R  # 导入数据库修改接口
 
 route_login = Blueprint('login', __name__)
 
+
+# 用户登录接口  [接口1]
 @route_login.route("", methods=["GET", "POST"])
 def login():
     '''
@@ -24,7 +26,13 @@ def login():
     userName = (tstSplit[0].split(':')[1]).replace('"', '')  # string
     password = (tstSplit[1].split(':')[1]).replace('"', '').strip('}')  # string
 
-    user_info = PyFind_Name(userName)  # 从数据库寻找登录名相同的帐号
+    user_info = U.PyFind_Name(userName)  # 从数据库寻找登录名相同的帐号
+    Rest_info = R.PyList()
+
+    isRestAdmin = False
+    for rest in Rest_info:
+        if user_info.Address == rest.Address:
+            isRestAdmin = True
 
     if not user_info:
         resp['code'] = 400
@@ -34,6 +42,11 @@ def login():
     if not user_info.CheckPassword(password):
         resp['code'] = 400
         resp['message'] = "用户名或密码错误-2"
+        return jsonify(resp)
+
+    if not isRestAdmin:
+        resp['code'] = 400
+        resp['message'] = "您的账号没有后台登录权限 -3"
         return jsonify(resp)
 
     token = random.randint(1, 99999)
