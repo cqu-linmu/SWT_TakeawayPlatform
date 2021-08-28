@@ -6,6 +6,7 @@ import DataBaseFolder.Interface.OrderBaseModify as o
 
 route_saledaily = Blueprint('sale-daily', __name__)
 
+
 @route_saledaily.route('/', methods=["GET", "POST"])
 def saleDaily():
     '''

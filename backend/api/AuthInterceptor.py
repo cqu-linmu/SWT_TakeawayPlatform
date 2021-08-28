@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
-from application import app
-from flask import request, g, redirect
+import re
+
+from flask import request, g
+
 # from common.models.User import (UserdataAll)
 from DataBaseFolder.Interface.UserBaseModify import *
+from application import app
 from utils.user.UserService import (UserService)
-from utils.UrlManager import (UrlManager)
-import re
 
 
 @app.before_request

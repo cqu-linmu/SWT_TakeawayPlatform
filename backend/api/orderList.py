@@ -1,14 +1,10 @@
-from flask import Blueprint, request, jsonify, redirect
-from utils.Helper import *
-from utils.UrlManager import UrlManager
-from application import app, db
-import json
+from flask import Blueprint, request, jsonify
 
 # 相关数据库调用
-from DataBaseFolder.Models.OrderData.OrderBase import Order
 from DataBaseFolder.Interface import OrderBaseModify as o
 
 route_orderList = Blueprint('order-list', __name__)
+
 
 @route_orderList.route("/", methods=['GET', 'POST'])
 def index():

@@ -38,7 +38,6 @@
 				console.log('data_sale:',data_sale)
 				for (var i = 0; i < data.length; i++) {
 					let sale = data[i].dish_number * data[i].dish_price
-					console.log('当前读取第'+ i + '条数据，sale='+sale)
 					data_sale.push({
 						name:data[i].dish_name+ ':' + sale,
 						value:sale,
