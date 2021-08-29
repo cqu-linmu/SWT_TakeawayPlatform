@@ -1,6 +1,7 @@
 from DataBaseFolder.DataBase import db
 import datetime
 from DataBaseFolder.Models.RestaurantModels.RestaurantBase import Restaurant
+from DataBaseFolder.Models.UserModels.UserBaseInfo import User
 from ..ModelsParameter import EntityBase
 
 class Order(db.Model,EntityBase):
@@ -29,3 +30,5 @@ class Order(db.Model,EntityBase):
         '''
         res = Restaurant.query.get(self.SourceRestaurant)
         res.AddTotalBenefits(self.Price)
+        userinfo=User.query.get(self.SourceUser)
+        userinfo.Consumption(self.Price)

@@ -20,11 +20,12 @@ def Add(username, pwd):
     return jsonify("ADD_SUCCESS")
 '''
 
-def PyAdd(username, pwd,Gender='未知',headportrait='NeedInit',address='NeedInit',telephone='NeedInit'):
+def PyAdd(username, pwd, openid,Gender='未知',headportrait='NeedInit',address='NeedInit',telephone='NeedInit'):
     '''
     Add new user
     :param username: user name
     :param pwd: password
+    :param openid: user OpendID
     :param Gender: gender
     :param headportrait: head portrait
     :param address: address
@@ -32,7 +33,7 @@ def PyAdd(username, pwd,Gender='未知',headportrait='NeedInit',address='NeedIni
     :return: user object
     '''
     print(username, pwd)
-    userinfo = User(UserName=username,Gender=Gender,HeadPortrait=headportrait,Address=address,Telephone=telephone)
+    userinfo = User(UserName=username,Gender=Gender,OpenID=openid,HeadPortrait=headportrait,Address=address,Telephone=telephone)
     userinfo.SetPassword(pwd)
     db.session.add(userinfo)
     db.session.commit()
@@ -94,3 +95,12 @@ def PyFind_Token(token):
     :return: user object
     '''
     return User.query.filter_by(Token=token).first()
+
+#@user.route('/find/openid/<openid>')
+def PyFind_OpendID(openid):
+    '''
+    Find a user that matches input user open id
+    :param openid: user open id
+    :return: user object
+    '''
+    return jsonify(User.query.filter_by(OpenID=openid).first().to_json())

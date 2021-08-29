@@ -21,12 +21,22 @@ class User(db.Model,EntityBase):
     HeadPortrait = db.Column(db.String(100),nullable=False,default='DefaultPath')
     Address = db.Column(db.String(500), nullable=False)  #Use '/' to divide diverse addresses
     Telephone = db.Column(db.String(20),nullable=False,default='NeedInit')
+    OpenID = db.Column(db.String(50),nullable=False)
 
     #DynamicInfo
     Token = db.Column(db.String(128))
     _HaveLogin = db.Column(db.Boolean,default=False)
     # String to simulate list, use '|' to divide ID and price, use '/' to divide diverse dishes
     Dishes = db.Column(db.String(2000),default='')
+    Balance=db.Column(db.Float)
+
+    def Consumption(self,NewConsumption):
+        if(self.Balance>=NewConsumption):
+            self.Balance-=NewConsumption
+        else:
+            return False
+
+        return True
 
     def Login(self):
         if(not self._HaveLogin):
