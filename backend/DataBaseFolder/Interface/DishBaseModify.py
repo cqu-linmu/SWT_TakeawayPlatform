@@ -3,7 +3,7 @@ from DataBaseFolder.Models.RestaurantModels.DishBase import Dish
 from DataBaseFolder.Models.RestaurantModels.RestaurantBase import Restaurant
 from DataBaseFolder.DataBase import db
 
-#dish=Blueprint('dish',__name__)
+# dish=Blueprint('dish',__name__)
 '''
 #Connect test
 @dish.route('/t')
@@ -12,7 +12,8 @@ def ServerTest():
     return jsonify('Test Success')
 '''
 
-def PyDirectlyAdd(resid,dishname, price, type, tag, picture, description):
+
+def PyDirectlyAdd(resid, dishname, price, type, tag, picture, description):
     '''
     You shouldn't use it! Add any dish in restaurant instead
     :param resid: restaurant id
@@ -25,7 +26,8 @@ def PyDirectlyAdd(resid,dishname, price, type, tag, picture, description):
     :return: dish object
     '''
     print(dishname, price)
-    dishinfo = Dish(DishName=dishname,Price=price,DishType=type,DishTag=tag,Details_Picture=picture,Description=description)
+    dishinfo = Dish(DishName=dishname, Price=price, DishType=type, DishTag=tag, Details_Picture=picture,
+                    Description=description)
     res = Restaurant.query.get(resid)
     res.Dishes.append(dishinfo)
     db.session.add(dishinfo)

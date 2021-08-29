@@ -29,15 +29,15 @@ def login():
     user_info = U.PyFind_Name(userName)  # 从数据库寻找登录名相同的帐号
     Rest_info = R.PyList()
 
-    isRestAdmin = False
-    for rest in Rest_info:
-        if user_info.Address == rest.Address:
-            isRestAdmin = True
-
     if not user_info:
         resp['code'] = 400
         resp['message'] = "用户名或密码错误 -1"
         return jsonify(resp)
+
+    isRestAdmin = False
+    for rest in Rest_info:
+        if user_info.Address == rest.Address:
+            isRestAdmin = True
 
     if not user_info.CheckPassword(password):
         resp['code'] = 400

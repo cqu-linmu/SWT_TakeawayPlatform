@@ -6,7 +6,6 @@
     </template>
     <template v-else>
       <img class="avatar" :src="userinfo.avatar" />
-      <!-- <avatar username="userinfo.username" background-color="#fff" color = "rgb(255,208,75)"></avatar> -->
       <h3>{{ userinfo.name }}</h3>
     </template>
   </div>
