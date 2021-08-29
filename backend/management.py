@@ -2,18 +2,37 @@ from application import app, manager
 from flask_script import Server
 
 # web后台接口导入
+# 登录与用户信息
 from api.login import route_login
 from api.userInfo import route_userInfo
+# 菜品信息
 from api.dishSaleList import route_dishSaleList
 from api.dishList import route_dishList
 from api.dishClassList import route_dishClassList
 from api.dish import route_dish
+# 订单信息
 from api.orderList import route_orderList
 from api.order import route_order
+# 统计信息
 from api.saledaily import route_saledaily
 
 # 微信小程序接口导入
-from api.wxLogin import route_wxLogin
+# 登录信息
+from api.WXLogin import route_WXLogin
+# 菜品信息
+from api.WXDishList import route_WXDishList
+from api.WXDishInfo import route_WXDishInfo
+# 订单信息
+from api.WXConfirmOrder import route_WXConfirmOrder
+from api.WXEvaluateOrder import route_WXEvaluateOrder
+from api.WXSubmitOrder import route_WXSubmitOrder
+from api.WXCheckOrder import route_WXCheckOrder
+from api.WXCancelOrder import route_WXCancelOrder
+# 支付信息
+from api.WXPay import route_WXPay
+# 地址信息
+from api.WXSearchAddress import route_WXSearchAddress
+from api.WXRefreshAddress import route_WXRefreshAddress
 
 # host需修改为服务器ip
 manager.add_command("runserver", Server(host='0.0.0.0', port=5111, use_debugger=True, use_reloader=True))
@@ -44,10 +63,27 @@ app.register_blueprint(route_saledaily, url_prefix="/api/sale-daily")
 微信小程序接口
 '''
 # 接口1：微信登录
-app.register_blueprint(route_wxLogin, url_prefix="/api/wx-login")
-
-
-
+app.register_blueprint(route_WXLogin, url_prefix="/api/WXLogin")
+# 接口2：获取菜品列表
+app.register_blueprint(route_WXDishList, url_prefix="/api/WXDishList")
+# 接口3：获取菜品详情
+app.register_blueprint(route_WXDishInfo, url_prefix="/api/WXDishInfo")
+# 接口4：确认收货
+app.register_blueprint(route_WXConfirmOrder, url_prefix="/api/WXConfirmOrder")
+# 接口5：评价订单
+app.register_blueprint(route_WXEvaluateOrder, url_prefix="/api/WXEvaluateOrder")
+# 接口6：提交订单
+app.register_blueprint(route_WXSubmitOrder, url_prefix="/api/WXSubmitOrder")
+# 接口7：伪支付
+app.register_blueprint(route_WXPay, url_prefix="/api/WXPay")
+# 接口8：查询各种状态的订单
+app.register_blueprint(route_WXCheckOrder, url_prefix="/api/WXCheckOrder")
+# 接口9：取消订单
+app.register_blueprint(route_WXCancelOrder, url_prefix="/api/WXCancelOrder")
+# 接口10：查询收货地址
+app.register_blueprint(route_WXSearchAddress, url_prefix="/api/WXSearchAddress")
+# 接口11：更新收货地址
+app.register_blueprint(route_WXRefreshAddress, url_prefix="/api/WXRefreshAddress")
 
 
 def main():

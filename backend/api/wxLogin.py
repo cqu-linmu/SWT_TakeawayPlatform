@@ -3,11 +3,11 @@ from utils.MemberService import MemberService
 from flask import Blueprint, request, jsonify
 import DataBaseFolder.Interface.UserBaseModify as U
 
-route_wxLogin = Blueprint('wx-login', __name__)
+route_WXLogin = Blueprint('WXLogin', __name__)
 
 
 # 微信登录接口，包含用户创建功能
-@route_wxLogin.route("/", methods=["GET", "POST"])
+@route_WXLogin.route("/", methods=["GET", "POST"])
 def login():
     resp = {'code': 200, 'message': '操作成功~', 'data': {}}
 
