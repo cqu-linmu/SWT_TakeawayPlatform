@@ -21,7 +21,7 @@ def foodIndex():
         for item in food_list:
             tmp_data = {
                 'dish_id': item.DishID,
-                'dish_name': item.dish_name,
+                'dish_name': item.DishName,
                 'dish_price': item.Price,
                 'dish_type': item.DishType,
                 'dish_tag': item.DishTag,
