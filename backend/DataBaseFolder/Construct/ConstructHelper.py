@@ -47,6 +47,7 @@ def DataBaseConstructType(Type, Num1, Num2):
 
     return True
 
+
 def DataBaseConstruct_User(UserNum):
     '''
     Input UserNum to control UserInfo number
@@ -59,11 +60,12 @@ def DataBaseConstruct_User(UserNum):
     GenderList = ['男', '女', '其他']
 
     for i in range(UserNum):
-        TpUserInfo = um.PyAdd(LastName[random.randint(0, 19)] + Name[random.randint(0, len(Name) - 1)], 114514)
+        TpUserInfo = um.PyAdd(LastName[random.randint(0, 19)] + Name[random.randint(0, len(Name) - 1)], 114514, 'ConstructOpenID')
         TpUserInfo.Gender = GenderList[random.randint(0, 2)]
         TpUserInfo.Telephone = RandomTelephone()
         TpUserInfo.SetPassword(RandomPwd())
         TpUserInfo.Address = RandomAddress()
+        TpUserInfo.Balance = random.randint(100, 1000)
 
     return True
 
@@ -124,7 +126,7 @@ def DataBaseConstruct_Restaurant(ResNum):
     :return: if construct success
     '''
     rm.PyAdd('野兽餐馆', '下北泽')
-    um.PyAdd('野兽餐馆', '1919810', '男', 'ResNA', '下北泽')
+    um.PyAdd('野兽餐馆', '1919810', 'ResConstructOpenID', '男', 'ResNA', '下北泽')
 
     return True
 
@@ -228,8 +230,8 @@ def RandomOrderRemark(OrderObj):
     '''
     RemarkList = ['无', '加辣', '不要辣', '加饭', '加菜', '不要葱', '不要芹菜', '不要折耳根']
     RemarkStr = ''
-    if (random.randint(0, 1)):
-        if (random.randint(0, 1)):
+    if random.randint(0, 1):
+        if random.randint(0, 1):
             RemarkStr += RemarkList[random.randint(1, 2)] + ' '
 
         RemarkLen = random.randint(1, 4)

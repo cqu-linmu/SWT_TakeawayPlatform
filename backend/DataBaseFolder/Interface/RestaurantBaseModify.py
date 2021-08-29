@@ -4,7 +4,7 @@ from DataBaseFolder.DataBase import db
 from .DishBaseModify import PyDirectlyAdd as DishAdd
 from .OrderBaseModify import PyDirectlyAdd as OrderAdd
 
-# restaurant=Blueprint('restaurant',__name__)
+#restaurant=Blueprint('restaurant',__name__)
 '''
 @restaurant.route('/t')
 def ServerTest():
@@ -28,7 +28,7 @@ def PyAdd(resname, resadd):
     :return: restaurant object
     '''
     print(resname, resadd)
-    resinfo = Restaurant(RestaurantName=resname, Address=resadd)
+    resinfo = Restaurant(RestaurantName=resname,Address=resadd)
     db.session.add(resinfo)
     db.session.commit()
     return resinfo
@@ -39,8 +39,7 @@ def AddDish(resid,dishname,price,type,tag='',picture='DefaultPath',description='
     return jsonify(dishinfo.to_json())
 '''
 
-
-def PyAddDish(resid, dishname, price, type, tag='', picture='DefaultPath', description='None'):
+def PyAddDish(resid,dishname,price,type,tag='',picture='DefaultPath',description='None'):
     '''
     Add new dish in this restaurant
     :param resid: restaurant id
@@ -52,7 +51,7 @@ def PyAddDish(resid, dishname, price, type, tag='', picture='DefaultPath', descr
     :param description: dish description
     :return: dish object
     '''
-    dishinfo = DishAdd(resid, dishname, price, type, tag, picture, description)
+    dishinfo = DishAdd(resid,dishname, price, type, tag, picture, description)
     return dishinfo
 
 '''
@@ -62,8 +61,7 @@ def AddOrder(resid, uid, remark, address, dishes, price, carriage):
     return jsonify(orderinfo.to_json())
 '''
 
-
-def PyAddOrder(resid, uid, remark, address, orders, price, carriage):
+def PyAddOrder(resid,uid, remark, address, orders, price, carriage):
     '''
     Add new order in this restaurant
     :param resid: restaurant id
@@ -75,7 +73,7 @@ def PyAddOrder(resid, uid, remark, address, orders, price, carriage):
     :param carriage: order carriage
     :return: order object
     '''
-    orderinfo = OrderAdd(resid, uid, remark, address, orders, price, carriage)
+    orderinfo=OrderAdd(resid,uid, remark, address, orders, price, carriage)
     return orderinfo
 
 '''
