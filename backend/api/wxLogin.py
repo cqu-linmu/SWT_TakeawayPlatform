@@ -35,6 +35,7 @@ def getWeChatOpenId(code):
 
 
 # 微信登录接口，包含用户创建功能
+# 这个接口没法测试，只能等小程序好了之后在整了
 @route_WXLogin.route("/", methods=["GET", "POST"])
 def login():
     resp = {'code': 200, 'message': '操作成功~', 'data': {}}
