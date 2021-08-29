@@ -1,6 +1,7 @@
 from application import app, manager
 from flask_script import Server
 
+# web后台接口导入
 from api.login import route_login
 from api.userInfo import route_userInfo
 from api.dishSaleList import route_dishSaleList
@@ -11,12 +12,15 @@ from api.orderList import route_orderList
 from api.order import route_order
 from api.saledaily import route_saledaily
 
+# 微信小程序接口导入
+from api.wxLogin import route_wxLogin
+
 # host需修改为服务器ip
+manager.add_command("runserver", Server(host='0.0.0.0', port=5111, use_debugger=True, use_reloader=True))
 
 '''
 web管理后台接口
 '''
-manager.add_command("runserver", Server(host='0.0.0.0', port=5111, use_debugger=True, use_reloader=True))
 # 接口1：登录
 app.register_blueprint(route_login, url_prefix="/api/login")
 # 接口2：获取登录商家信息
@@ -35,6 +39,15 @@ app.register_blueprint(route_orderList, url_prefix="/api/order-list")
 app.register_blueprint(route_order, url_prefix="/api/order")  # func: edit(/edit); delete(/)
 # 接口11：每日流水
 app.register_blueprint(route_saledaily, url_prefix="/api/sale-daily")
+
+'''
+微信小程序接口
+'''
+# 接口1：微信登录
+app.register_blueprint(route_wxLogin, url_prefix="/api/wx-login")
+
+
+
 
 
 def main():

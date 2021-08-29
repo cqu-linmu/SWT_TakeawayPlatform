@@ -5,6 +5,7 @@ from DataBaseFolder.Interface import DishBaseModify as d
 
 route_dishSaleList = Blueprint('dish-Sale-list', __name__)
 
+
 @route_dishSaleList.route("/", methods=['GET', 'POST'])
 def index():
     '''
@@ -18,7 +19,7 @@ def index():
     totalList = len(dishList)
     if pageNum == -1:  # 当pageNum=-1时，返回所有订单
         dishList = dishList
-    else: # 否则返回对应页面的订单
+    else:  # 否则返回对应页面的订单
         dishList = dishList[(pageNum - 1) * page_size:pageNum * page_size]
 
     def bedict(a):

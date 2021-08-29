@@ -36,6 +36,7 @@ def before_request():
         return
     return
 
+
 def check_login():
     '''
     判断用户是否已经登录

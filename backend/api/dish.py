@@ -10,6 +10,7 @@ from application import app
 
 route_dish = Blueprint('dish', __name__)
 
+
 @route_dish.route("/", methods=["GET", "POST"])
 def delDish():
     '''
