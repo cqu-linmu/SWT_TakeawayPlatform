@@ -6,13 +6,12 @@ from flask import Blueprint, request, jsonify, make_response
 
 from application import app
 from utils.user.UserService import (UserService)  # UserService：封装用户登录相关的方法
-from DataBaseFolder.Construct.ConstructHelper import RandomPwd  # 随机20位密码生成
+from DataBaseFolder.Construct.ConstructHelper import RandomPwd, RandomTelephone  # 随机20位密码生成
 import DataBaseFolder.Interface.UserBaseModify as U  # 用户编辑接口
 
 route_WXLogin = Blueprint('WXLogin', __name__)
 
 
-@staticmethod
 def getWeChatOpenId(code):
     '''
     从微信平台处获取openid
@@ -35,20 +34,28 @@ def getWeChatOpenId(code):
 
 
 # 微信登录接口，包含用户创建功能
-# 这个接口没法测试，只能等小程序好了之后在整了
+# todo: 这个接口没法测试，只能等小程序好了之后在整了;根据变更修改了接口实现
 @route_WXLogin.route("/", methods=["GET", "POST"])
 def login():
     resp = {'code': 200, 'message': '操作成功~', 'data': {}}
     req = request.values
 
     # 解析传回的参数
+    # code
     code = req['code'] if 'code' in req else ''
-    user_name = req['user_name'] if 'user_name' in req else ''
-    # password = req['password'] if 'password' in req else '' [这个不需要了]
+    # nickName
+    user_name = req['nickName'] if 'nickName' in req else ''
+    # gender
     gender = req['gender'] if 'gender' in req else ''
-    head_portrait = req['head_portrait'] if 'head_portrait' in req else ''
-    address = req['address'] if 'address' in req else ''
-    telephone = req['telephone'] if 'telephone' in req else ''
+    if gender == 0:
+        gender = '未知'
+    elif gender == 1:
+        gender = '男'
+    else:
+        gender = '女'
+    # avatarUrl
+    head_portrait = req['avatarUrl'] if 'avatarUrl' in req else ''
+    address = req['country'] + '-' + req['provience'] + '-' + req['city']
 
     # 当传回的code不合法时拒绝登陆
     if not code or len(code) < 1:
@@ -75,7 +82,7 @@ def login():
 
     if not userInfo:
         # 注册账号并传回自定义登录态
-        U.PyAdd(user_name, RandomPwd(), openid, gender, head_portrait, address, telephone)
+        U.PyAdd(user_name, RandomPwd(), openid, gender, head_portrait, address, RandomTelephone())
         new_user = U.PyFind_Name(user_name)
         new_user.Token = str(token)
         new_user.Login()
@@ -88,7 +95,7 @@ def login():
         resp['code'] = 400
         resp['message'] = "登陆失败！请检查传回的用户信息是否正确 -3"
 
-    elif userInfo._HaveLogin == 1:
+    elif userInfo.GetLoginStatus():
         # 用户已经处于登录状态时拒绝登录
         resp['code'] = 400
         resp['message'] = "登陆失败！您的账号已经在其他客户端登录 -4"

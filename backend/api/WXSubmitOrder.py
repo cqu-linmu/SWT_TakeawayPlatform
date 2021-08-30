@@ -9,6 +9,8 @@ import DataBaseFolder.Interface.DishBaseModify as d
 route_WXSubmitOrder = Blueprint('WXSubmitOrder', __name__)
 
 
+# todo: 提交订单接口等小程序好了之后在整
+@route_WXSubmitOrder.route('/', methods=['GET', 'POST'])
 def index():
     '''
     提交订单接口
@@ -29,7 +31,7 @@ def index():
         # 根据id查找对应价格
         dishPrice = d.PyFind_ID(dish_id).Price
         # 累加菜品价格
-        price += dishPrice*num_dish
+        price += dishPrice * num_dish
         # 将所有菜品id和数量连接为一个字符串:  '|' 分割数量 '/' 分割不同菜品
         dishes = dishes + str(dish_id) + "|" + str(num_dish) + "/"
 
