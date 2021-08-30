@@ -1,3 +1,5 @@
 /.idea
 /backend/.idea
 /frontend/.idea
+
+.pyc

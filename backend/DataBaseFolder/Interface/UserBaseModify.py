@@ -103,4 +103,4 @@ def PyFind_OpendID(openid):
     :param openid: user open id
     :return: user object
     '''
-    return jsonify(User.query.filter_by(OpenID=openid).first().to_json())
+    return User.query.filter_by(OpenID=openid).first().to_json()

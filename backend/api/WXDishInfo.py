@@ -17,14 +17,14 @@ def foodInfo():
 
     # 获取菜品信息
     dish_info = d.PyFind_ID(dish_id)
-    if not dish_info or not dish_info.status:
+    if not dish_info:
         resp['code'] = 400
         resp['message'] = "没有找到对应菜品"
         return jsonify(resp)
 
     # 返回信息
-    resp['data']['info'] = {
-        "dish_name": dish_info.name,  # 菜品名
+    resp['data'] = {
+        "dish_name": dish_info.DishName,  # 菜品名
         'dish_img': dish_info.Thumbnail,  # 菜品图片
         "dish_price": str(dish_info.Price),  # 菜品价格
         "dish_sold": dish_info.Sold,  # 菜品销量
