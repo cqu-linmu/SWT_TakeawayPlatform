@@ -11,7 +11,7 @@ def index():
     取消订单页面接口
     '''
     resp = {'code': 200, 'message': '取消成功', 'data': {}}
-    req = request.values
+    req = request.values['data']
     order_id = req['order_id'] if 'order_id' in req else ''
     # 根据id查找对应订单
     curOrder = o.PyFind_OrderID(order_id)

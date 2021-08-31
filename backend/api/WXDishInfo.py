@@ -12,7 +12,7 @@ def foodInfo():
     特定餐品信息(finish)
     '''
     resp = {'code': 200, 'message': '操作成功~', 'data': {}}
-    req = request.values
+    req = request.values['data']
     dish_id = int(req['dish_id']) if 'dish_id' in req else 0  # 菜品id
 
     # 获取菜品信息

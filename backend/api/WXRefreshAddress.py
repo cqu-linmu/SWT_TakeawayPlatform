@@ -16,7 +16,7 @@ def refreshAddress():
     :return:
     """
     resp = {'code': 200, 'message': '修改地址成功', 'data': {}}
-    req = request.values
+    req = request.values['data']
     new_address_lst = req['user_address_new'] if 'user_address_new' in req else ' '  # 新地址
     user_address_new = ''
     for address in new_address_lst:

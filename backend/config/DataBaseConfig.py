@@ -28,7 +28,12 @@ API_IGNORE_URLS = [
 # cookie名
 AUTH_COOKIE_NAME = "Bearer"
 
+
+# appid wx5a2a890bf53067c5
+# appsecret 52d0e43d04372be26b5cd201b64bb312
+
+# 后台上面改秘钥的密码 swtcqu123
 MINA_APP = {
-    'appid': 114,
-    'appkey': 514
+    'appid': 'wx5a2a890bf53067c5',
+    'appkey': '52d0e43d04372be26b5cd201b64bb312'
 }

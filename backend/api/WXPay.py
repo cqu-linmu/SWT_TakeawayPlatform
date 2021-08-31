@@ -13,7 +13,7 @@ def index():
     付款页面接口
     '''
     resp = {'code': 200, 'message': "支付成功", 'pay_status': 1}
-    req = request.values
+    req = request.values['data']
     order_id = req['order_id'] if 'order_id' in req else ''
     money_amount = float(req['money_amount'])
 

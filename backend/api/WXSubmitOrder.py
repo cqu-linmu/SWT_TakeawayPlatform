@@ -17,7 +17,7 @@ def index():
     '''
 
     resp = {'code': 200, 'message': '获取订单列表成功', 'data': {}}
-    req = request.values
+    req = request.values['data']
     # 解析请求数据
     user_id = req['user_id'] if 'order_id' in req else ''
     # 根据id查找对应用户

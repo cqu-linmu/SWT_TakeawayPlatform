@@ -38,7 +38,7 @@ def getWeChatOpenId(code):
 @route_WXLogin.route("/", methods=["GET", "POST"])
 def login():
     resp = {'code': 200, 'message': '操作成功~', 'data': {}}
-    req = request.values
+    req = request.values['data']
 
     # 解析传回的参数
     # code

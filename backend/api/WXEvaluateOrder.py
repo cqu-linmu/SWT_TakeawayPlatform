@@ -14,7 +14,7 @@ def EvaluateOrder():
     :return:
     '''
     resp = {'code': 200, 'message': '操作成功~', 'data': {}}
-    req = request.values
+    req = request.values['data']
 
     # 解析请求参数
     order_id = int(req['order_id']) if 'order_id' in req else 0  # 菜品id
