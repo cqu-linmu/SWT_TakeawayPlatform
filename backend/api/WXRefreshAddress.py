@@ -39,12 +39,12 @@ def refreshAddress():
 
     # 原地址不存在，则添加新地址
     if not user_address:
-        GenericModify(1, user_id, 'User', 'Address', str(user_address))
+        GenericModify(1, user_id, 'User', 'Address', str(user_address_new))
         resp['code'] = 200
         resp['message'] = "添加地址成功"
         return jsonify(resp)
 
     # 原地址存在，则修改未新输入的地址
-    GenericModify(1, user_id, 'User', 'Address', str(user_address))
+    GenericModify(1, user_id, 'User', 'Address', str(user_address_new))
 
     return jsonify(resp)
