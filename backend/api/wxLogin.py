@@ -38,8 +38,9 @@ def getWeChatOpenId(code):
 @route_WXLogin.route("/", methods=["GET", "POST"])
 def login():
     resp = {'statusCode': 200, 'message': '操作成功~', 'data': {}}
-    req = request.values['data']
 
+    req = eval(request.values['data'])
+    print(req)
     # 解析传回的参数
     # code
     code = req['code'] if 'code' in req else ''
@@ -55,7 +56,7 @@ def login():
         gender = '女'
     # avatarUrl
     head_portrait = req['avatarUrl'] if 'avatarUrl' in req else ''
-    address = req['country'] + '-' + req['provience'] + '-' + req['city']
+    address = req['country'] + '-' + req['province'] + '-' + req['city']
 
     # 当传回的code不合法时拒绝登陆
     if not code or len(code) < 1:
@@ -65,6 +66,7 @@ def login():
 
     # 获取openid
     openid = getWeChatOpenId(code)
+    print(openid)
 
     # 当openid为空时拒绝登录
     if openid is None:
@@ -89,25 +91,26 @@ def login():
         resp['data']['token'] = token
         resp['data']['refresh_token'] = refresh_token
         resp['message'] = "创建并绑定账号成功！ 您的账户id是" + str(new_user.UserID)
+        response = make_response(
+            json.dumps(resp))  # 返回登录成功的信息
+        response.set_cookie(app.config['AUTH_COOKIE_NAME'], '%s#%s' % (
+            UserService.geneAuthCode(new_user), new_user.UserID), 60 * 60 * 24 * 120)  # 保存120天
+        return response
 
-    elif userInfo.UserName != user_name:
-        # 传回的用户信息不正确时拒绝登录
+    elif userInfo.UserName != user_name or userInfo.GetLoginStatus():
+        # 传回的用户信息不正确时拒绝登录;用户已经处于登录状态时拒绝登录
         resp['statusCode'] = 400
-        resp['message'] = "登陆失败！请检查传回的用户信息是否正确 -3"
+        resp['message'] = "登陆失败！检查您的账号状态 -3, -4"
+        return jsonify(resp)
 
-    elif userInfo.GetLoginStatus():
-        # 用户已经处于登录状态时拒绝登录
-        resp['statusCode'] = 400
-        resp['message'] = "登陆失败！您的账号已经在其他客户端登录 -4"
-
-    else:
-        # openid已经绑定到了现有账户且其他信息正确，则允许直接登陆
-        userInfo.Token = str(token)
-        resp['data']['token'] = token
-        resp['data']['refresh_token'] = refresh_token
-        resp['message'] = "登陆成功！"
-
-    response = make_response(json.dumps(resp)).set_cookie(app.config['AUTH_COOKIE_NAME'], '%s#%s' % (
+    # openid已经绑定到了现有账户且其他信息正确，则允许直接登陆
+    userInfo.Token = str(token)
+    userInfo.Login()
+    resp['data']['token'] = token
+    resp['data']['refresh_token'] = refresh_token
+    resp['message'] = "登陆成功！"
+    response = make_response(
+        json.dumps(resp))  # 返回登录成功的信息
+    response.set_cookie(app.config['AUTH_COOKIE_NAME'], '%s#%s' % (
         UserService.geneAuthCode(userInfo), userInfo.UserID), 60 * 60 * 24 * 120)  # 保存120天
-
     return response

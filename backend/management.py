@@ -34,6 +34,7 @@ from api.WXPay import route_WXPay
 from api.WXSearchAddress import route_WXSearchAddress
 from api.WXRefreshAddress import route_WXRefreshAddress
 from api.WXRecommend import route_WXRecommend
+
 # host需修改为服务器ip
 manager.add_command("runserver", Server(host='0.0.0.0', port=5111, use_debugger=True, use_reloader=True))
 
@@ -86,6 +87,7 @@ app.register_blueprint(route_WXSearchAddress, url_prefix="/api/WXSearchAddress")
 app.register_blueprint(route_WXRefreshAddress, url_prefix="/api/WXRefreshAddress")
 # 接口12：获取推荐菜品
 app.register_blueprint(route_WXRecommend, url_prefix="/api/WXRecommend")
+
 
 def main():
     manager.run()

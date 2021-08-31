@@ -12,8 +12,10 @@ def foodInfo():
     特定餐品信息(finish)
     '''
     resp = {'statusCode': 200, 'message': '操作成功~', 'data': {}}
-    req = request.values['data']
-    dish_id = int(req['dish_id']) if 'dish_id' in req else 0  # 菜品id
+    req = eval(request.values['data'])
+
+    # dish_id = int(req.split(':')[-1].replace('"', '').strip('}'))  # 菜品id
+    dish_id = int(req['dish_id'])
 
     # 获取菜品信息
     dish_info = d.PyFind_ID(dish_id)

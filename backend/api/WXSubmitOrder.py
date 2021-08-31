@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+import json
+
 from utils.MemberService import MemberService
 from flask import Blueprint, request, jsonify
 
@@ -17,8 +19,9 @@ def index():
     '''
 
     resp = {'statusCode': 200, 'message': '获取订单列表成功', 'data': {}}
-    req = request.values['data']
+    req = json.loads(request.values['data'])[0]
     # 解析请求数据
+    print(req)
     user_id = req['user_id'] if 'order_id' in req else ''
     # 根据id查找对应用户
     user = u.PyFind_ID(user_id)

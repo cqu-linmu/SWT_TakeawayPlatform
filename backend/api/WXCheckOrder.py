@@ -13,7 +13,7 @@ def index():
     查询各种状态订单接口
     '''
     resp = {'statusCode': 200, 'message': '获取订单列表成功', 'data': []}
-    req = request.values['data']
+    req = eval(request.values['data'])
     user_id = req['user_id'] if 'user_id' in req else ''
     status_req = req['status_req'] if 'status_req' in req else ''
     print(status_req)

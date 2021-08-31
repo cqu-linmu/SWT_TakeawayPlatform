@@ -12,8 +12,9 @@ def searchAddress():
     查询收货地址
     """
     resp = {'statusCode': 200, 'message': '操作成功', 'data': {}}
-    req = request.values['data']
-    user_id = req['user_id'] if 'user_id' in req else ' '  # 登录用户id
+    req = eval(request.values['data'])
+    print(req,type(req))
+    user_id = int(req['user_id']) if 'user_id' in req else ' '  # 登录用户id
 
     # 查询用户信息
     member_info = U.PyFind_ID(user_id)

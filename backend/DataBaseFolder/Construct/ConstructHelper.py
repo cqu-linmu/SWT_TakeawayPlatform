@@ -6,7 +6,7 @@ import string
 import datetime
 
 
-def DataBaseConstruct_ALL(Seed=None, UserNum=100, MaxAddrLen=5, ResNum=1, DishPerRes=10, OrderPerUser=10, MaxOrderLen=10,
+def DataBaseConstruct_ALL(Seed=None, UserNum=100, ResNum=1, DishPerRes=10, OrderPerUser=10, MaxOrderLen=10,
                           OrderDateLen=100):
     '''
     DataBase Construct/Init, call all the construct types
@@ -20,7 +20,7 @@ def DataBaseConstruct_ALL(Seed=None, UserNum=100, MaxAddrLen=5, ResNum=1, DishPe
     :return: void
     '''
     random.seed(Seed)
-    DataBaseConstruct_User(UserNum,MaxAddrLen)
+    DataBaseConstruct_User(UserNum)
     DataBaseConstruct_Restaurant(ResNum)
     DataBaseConstruct_Dish(ResNum, DishPerRes)
     DataBaseConstruct_Order(UserNum, DishPerRes, OrderPerUser, MaxOrderLen, OrderDateLen)
@@ -48,7 +48,7 @@ def DataBaseConstructType(Type, Num1, Num2):
     return True
 
 
-def DataBaseConstruct_User(UserNum,MaxAddrLen):
+def DataBaseConstruct_User(UserNum):
     '''
     Input UserNum to control UserInfo number
     :param UserNum: user number
@@ -64,7 +64,7 @@ def DataBaseConstruct_User(UserNum,MaxAddrLen):
         TpUserInfo.Gender = GenderList[random.randint(0, 2)]
         TpUserInfo.Telephone = RandomTelephone()
         TpUserInfo.SetPassword(RandomPwd())
-        TpUserInfo.Address = RandomAddress(MaxAddrLen)
+        TpUserInfo.Address = RandomAddress()
         TpUserInfo.Balance = random.randint(100, 1000)
 
     return True
@@ -107,17 +107,14 @@ def RandomPwd():
     return TpPwd
 
 
-def RandomAddress(MaxAddrLen):
+def RandomAddress():
     '''
     Random address generator
     :return: address
     '''
     AddressBegin = ['鸿恩怡园', '万科金色悦城', '富州新城', '溯源居', '天骄俊园']
-    TpAddress=''
-    TpLen=random.randint(1,MaxAddrLen)
-    for i in range(TpLen):
-        TpAddress += '{}{}栋{}-{}'.format(str(AddressBegin[random.randint(0, 4)]), str(random.randint(1, 8)),
-                                    str(random.randint(1, 31)), str(random.randint(1, 10)))+'/'
+    TpAddress = '{}{}栋{}-{}'.format(str(AddressBegin[random.randint(0, 4)]), str(random.randint(1, 8)),
+                                    str(random.randint(1, 31)), str(random.randint(1, 10)))
 
     return TpAddress
 
@@ -220,13 +217,7 @@ def DataBaseConstruct_Order(UserNum, DishPerRes, OrderPerUser, MaxOrderLen, Orde
             RandomOrderStatus(orderinfo)
             RandomOrderRemark(orderinfo)
             TpUserInfo = um.PyFind_ID(orderinfo.UserID)
-            TpAdd=''
-            for addchar in TpUserInfo.Address:
-                if(addchar=='/'):
-                    break
-                else:
-                    TpAdd+=str(addchar)
-            orderinfo.OrderAddress = TpAdd
+            orderinfo.OrderAddress = TpUserInfo.Address
 
     return True
 
