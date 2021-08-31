@@ -1,5 +1,5 @@
 from flask import Flask
-import config.BaseConfig as DataBaseConfig
+import config.BaseConfig as BaseConfig
 from DataBaseFolder.DataBase import db
 import datetime
 
