@@ -12,11 +12,16 @@ route_WXRefreshAddress = Blueprint('WXRefreshAddress', __name__)
 def refreshAddress():
     """
     添加/删除/修改收货地址
+    request中传回的地址是
     :return:
     """
     resp = {'code': 200, 'message': '修改地址成功', 'data': {}}
     req = request.values
-    user_address_new = req['user_address_new'] if 'user_address_new' in req else ' '  # 新地址
+    new_address_lst = req['user_address_new'] if 'user_address_new' in req else ' '  # 新地址
+    user_address_new = ''
+    for address in new_address_lst:
+        user_address_new += address + '/'
+
     user_id = req['user_id'] if 'user_id' in req else ' '  # 登录用户id
 
     # 获得用户信息
@@ -25,7 +30,7 @@ def refreshAddress():
 
     # 若新地址未输入,则意味着删除原地址
     if not user_address_new:
-        GenericModify(1, user_id, 'User', 'Address', str(' '))
+        GenericModify(1, user_id, 'User', 'Address', str('/'))
         resp['message'] = "删除地址成功"
         return jsonify(resp)
 

@@ -9,7 +9,7 @@ route_WXSearchAddress = Blueprint('WXSearchAddress', __name__)
 @route_WXSearchAddress.route("/", methods=["POST", "GET"])
 def searchAddress():
     """
-    查询收获地址
+    查询收货地址
     """
     resp = {'code': 200, 'message': '操作成功', 'data': {}}
     req = request.values
@@ -22,7 +22,7 @@ def searchAddress():
     # 地址不存在
     judge = False  # 判断member_address是否为空，False为空，True为非空
     for item in member_address:
-        if item != " ":
+        if item != "":
             judge = True
             break
     if not judge:
@@ -30,6 +30,6 @@ def searchAddress():
         resp['message'] = "不存在地址"
         return jsonify(resp)
     resp['data'] = {
-        'user_address': member_address
+        'user_address': member_address[:-2]
     }
     return jsonify(resp)
