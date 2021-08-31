@@ -17,10 +17,15 @@ def searchAddress():
 
     # 查询用户信息
     member_info = U.PyFind_ID(user_id)
-    member_address = member_info.Address
+    member_address = member_info.Address.split("/")
 
     # 地址不存在
-    if not member_address:
+    judge = False  # 判断member_address是否为空，False为空，True为非空
+    for item in member_address:
+        if item != " ":
+            judge = True
+            break
+    if not judge:
         resp['code'] = 400
         resp['message'] = "不存在地址"
         return jsonify(resp)
