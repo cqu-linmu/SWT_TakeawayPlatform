@@ -11,7 +11,7 @@ def searchAddress():
     """
     查询收货地址
     """
-    resp = {'code': 200, 'message': '操作成功', 'data': {}}
+    resp = {'statusCode': 200, 'message': '操作成功', 'data': {}}
     req = request.values['data']
     user_id = req['user_id'] if 'user_id' in req else ' '  # 登录用户id
 
@@ -26,7 +26,7 @@ def searchAddress():
             judge = True
             break
     if not judge:
-        resp['code'] = 400
+        resp['statusCode'] = 400
         resp['message'] = "不存在地址"
         return jsonify(resp)
     resp['data'] = {

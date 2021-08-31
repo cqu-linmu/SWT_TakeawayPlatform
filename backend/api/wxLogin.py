@@ -37,7 +37,7 @@ def getWeChatOpenId(code):
 # todo: 这个接口没法测试，只能等小程序好了之后在整了;根据变更修改了接口实现
 @route_WXLogin.route("/", methods=["GET", "POST"])
 def login():
-    resp = {'code': 200, 'message': '操作成功~', 'data': {}}
+    resp = {'statusCode': 200, 'message': '操作成功~', 'data': {}}
     req = request.values['data']
 
     # 解析传回的参数
@@ -59,7 +59,7 @@ def login():
 
     # 当传回的code不合法时拒绝登陆
     if not code or len(code) < 1:
-        resp['code'] = 400
+        resp['statusCode'] = 400
         resp['message'] = "需要code -1"
         return jsonify(resp)
 
@@ -68,7 +68,7 @@ def login():
 
     # 当openid为空时拒绝登录
     if openid is None:
-        resp['code'] = -1
+        resp['statusCode'] = 400
         resp['message'] = "调用微信出错 -2"
         return jsonify(resp)
 
@@ -92,12 +92,12 @@ def login():
 
     elif userInfo.UserName != user_name:
         # 传回的用户信息不正确时拒绝登录
-        resp['code'] = 400
+        resp['statusCode'] = 400
         resp['message'] = "登陆失败！请检查传回的用户信息是否正确 -3"
 
     elif userInfo.GetLoginStatus():
         # 用户已经处于登录状态时拒绝登录
-        resp['code'] = 400
+        resp['statusCode'] = 400
         resp['message'] = "登陆失败！您的账号已经在其他客户端登录 -4"
 
     else:

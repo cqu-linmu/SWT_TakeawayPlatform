@@ -16,7 +16,7 @@ def index():
     提交订单接口
     '''
 
-    resp = {'code': 200, 'message': '获取订单列表成功', 'data': {}}
+    resp = {'statusCode': 200, 'message': '获取订单列表成功', 'data': {}}
     req = request.values['data']
     # 解析请求数据
     user_id = req['user_id'] if 'order_id' in req else ''

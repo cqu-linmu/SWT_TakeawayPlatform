@@ -11,14 +11,14 @@ def foodInfo():
     '''
     特定餐品信息(finish)
     '''
-    resp = {'code': 200, 'message': '操作成功~', 'data': {}}
+    resp = {'statusCode': 200, 'message': '操作成功~', 'data': {}}
     req = request.values['data']
     dish_id = int(req['dish_id']) if 'dish_id' in req else 0  # 菜品id
 
     # 获取菜品信息
     dish_info = d.PyFind_ID(dish_id)
     if not dish_info:
-        resp['code'] = 400
+        resp['statusCode'] = 400
         resp['message'] = "没有找到对应菜品"
         return jsonify(resp)
 

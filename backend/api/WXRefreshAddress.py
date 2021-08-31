@@ -15,7 +15,7 @@ def refreshAddress():
     request中传回的地址是
     :return:
     """
-    resp = {'code': 200, 'message': '修改地址成功', 'data': {}}
+    resp = {'statusCode': 200, 'message': '修改地址成功', 'data': {}}
     req = request.values['data']
     new_address_lst = req['user_address_new'] if 'user_address_new' in req else ' '  # 新地址
     user_address_new = ''
@@ -40,7 +40,7 @@ def refreshAddress():
     # 原地址不存在，则添加新地址
     if not user_address:
         GenericModify(1, user_id, 'User', 'Address', str(user_address_new))
-        resp['code'] = 200
+        resp['statusCode'] = 200
         resp['message'] = "添加地址成功"
         return jsonify(resp)
 

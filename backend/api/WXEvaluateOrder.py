@@ -13,7 +13,7 @@ def EvaluateOrder():
     对订单下所有菜品进行评分
     :return:
     '''
-    resp = {'code': 200, 'message': '操作成功~', 'data': {}}
+    resp = {'statusCode': 200, 'message': '操作成功~', 'data': {}}
     req = request.values['data']
 
     # 解析请求参数
@@ -24,12 +24,12 @@ def EvaluateOrder():
 
     if not order:
         # 订单信息为空时拒绝评分请求
-        resp['code'] = 400
+        resp['statusCode'] = 400
         resp['message'] = '操作失败，请检查返回的订单ID -1'
         resp['data']['rate_status'] = 0
     elif order.OrderStatus != '待评价':
         # 订单状态不正确时拒绝评分请求
-        resp['code'] = 400
+        resp['statusCode'] = 400
         resp['message'] = '操作失败，请检查订单状态 -2'
         resp['data']['rate_status'] = 0
     else:

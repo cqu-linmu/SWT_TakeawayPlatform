@@ -9,7 +9,7 @@ route_WXRecommend = Blueprint('WXRecommend', __name__)
 
 @route_WXRecommend.route('/', methods=['GET', 'POST'])
 def recommend():
-    resp = {'code': 200, 'message': '操作成功~', 'data': []}
+    resp = {'statusCode': 200, 'message': '操作成功~', 'data': []}
     recommended_dish_id = []
     for i in range(3):
         dish_id = random.randint(1, 10)

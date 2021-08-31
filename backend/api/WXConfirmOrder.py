@@ -14,7 +14,7 @@ def confirmOrder():
     确认收货
     :return:
     '''
-    resp = {'code': 200, 'message': '操作成功~', 'data': {}}
+    resp = {'statusCode': 200, 'message': '操作成功~', 'data': {}}
     req = request.values['data']
 
     # 解析请求参数
@@ -25,12 +25,12 @@ def confirmOrder():
 
     if not order:
         # 当不存在此订单时拒绝确认收货
-        resp['code'] = 400
+        resp['statusCode'] = 400
         resp['message'] = '操作失败，请检查返回的订单ID是否正确 -1'
         resp['data']['receive_status'] = 0
     elif order.OrderStatus != '待收货':
         # 订单状态不正确时拒绝评分请求
-        resp['code'] = 400
+        resp['statusCode'] = 400
         resp['message'] = '操作失败，请检查订单状态 -2'
         resp['data']['rate_status'] = 0
     else:
@@ -54,7 +54,7 @@ def confirmOrder():
             order.OrderStatus = '待评价'
             resp['data']['receive_status'] = 1
         except:
-            resp['code'] = 400
+            resp['statusCode'] = 400
             resp['message'] = '确认收货异常，请联系后台人员确认数据状态 -3'
             resp['data']['receive_status'] = 0
 
