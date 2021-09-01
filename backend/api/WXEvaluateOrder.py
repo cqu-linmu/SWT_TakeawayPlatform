@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from backend.DataBaseFolder.Interface.InterfaceHelper import GenericModify
 from utils.MemberService import MemberService
 from flask import Blueprint, request, jsonify
 import DataBaseFolder.Interface.OrderBaseModify as o
@@ -37,7 +38,7 @@ def EvaluateOrder():
         for dish in dishList[:-2]:
             # 解析这一订单中的菜品名称和数量
             dishPair = dish.split("|")
-            dishID = dishPair[0]
+            dishID = int(dishPair[0])
             dishSold = int(dishPair[1])
             # 拉取菜品对象并更改评分
             dishObj = d.PyFind_ID(dishID)
@@ -48,8 +49,11 @@ def EvaluateOrder():
             # print(dishObj.DishName)
             # print("___________")
             # todo: 泛型
-            dishObj.Score = ((dishObj.Sold - dishSold) * dishObj.Score + score) / dishSold
+            new_Score = ((dishObj.Sold - dishSold) * dishObj.Score + score) / dishSold
+            GenericModify(1,dishID,'Dish','Score',str(new_Score))
+        # todo: 泛型
         # 状态更改为已完成
-        order.OrderStatus = '已完成'
+        # order.OrderStatus = '已完成'
+        GenericModify(1,order.OrderID,'Order','OrderStatus','已完成')
         resp['data']['rate_status'] = 1
     return jsonify(resp)
