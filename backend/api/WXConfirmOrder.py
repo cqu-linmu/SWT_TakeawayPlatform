@@ -46,11 +46,14 @@ def confirmOrder():
                 dishObj = d.PyFind_ID(dishID)
                 restaurantObj = r.PyFind_ID(dishObj.SourceRestaurant)
                 # 更改销售数量
+                # todo: 泛型
                 dishObj.Sold += dishSold
                 # 更改销售额
                 for i in range(dishSold):
+                    # todo: 泛型
                     restaurantObj.TotalBenefits += dishObj.Price
             # 状态更改为待评价
+            # todo: 泛型
             order.OrderStatus = '待评价'
             resp['data']['receive_status'] = 1
         except:

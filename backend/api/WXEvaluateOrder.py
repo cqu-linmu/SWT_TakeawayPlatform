@@ -47,7 +47,7 @@ def EvaluateOrder():
             # print(dishSold)
             # print(dishObj.DishName)
             # print("___________")
-
+            # todo: 泛型
             dishObj.Score = ((dishObj.Sold - dishSold) * dishObj.Score + score) / dishSold
         # 状态更改为已完成
         order.OrderStatus = '已完成'

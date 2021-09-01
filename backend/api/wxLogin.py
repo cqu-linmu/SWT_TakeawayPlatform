@@ -86,7 +86,9 @@ def login():
         # 注册账号并传回自定义登录态
         U.PyAdd(user_name, RandomPwd(), openid, gender, head_portrait, address, RandomTelephone())
         new_user = U.PyFind_Name(user_name)
+        # todo: 泛型
         new_user.Token = str(token)
+        # todo: 泛型
         new_user.Login()
         resp['data']['token'] = token
         resp['data']['refresh_token'] = refresh_token
@@ -104,6 +106,7 @@ def login():
         return jsonify(resp)
 
     # openid已经绑定到了现有账户且其他信息正确，则允许直接登陆
+    # todo: 泛型
     userInfo.Token = str(token)
     userInfo.Login()
     resp['data']['token'] = token

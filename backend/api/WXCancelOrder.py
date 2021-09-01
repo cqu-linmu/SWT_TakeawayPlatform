@@ -20,5 +20,6 @@ def index():
         resp['statusCode'] = 400
         resp['message'] = '取消失败：不能重复取消订单 -1'
     else:
+        # todo: 泛型
         curOrder.OrderStatus = '已取消'
     return jsonify(resp)

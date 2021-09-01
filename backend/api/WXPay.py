@@ -30,6 +30,8 @@ def index():
     if user.Consumption(money_amount) and order.OrderStatus == '待付款':
         resp['message'] = "支付成功"
         resp['statusCode'] = 200
+        # todo: 泛型
+        order.OrderStatus='待发货'
     else:
         resp['message'] = "支付失败！请检查订单状态 -1"
         resp['statusCode'] = 400
