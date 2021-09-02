@@ -14,6 +14,12 @@ def GenericModify(ModifyType, DataID, DataBaseModelName, DataParameterName='', N
     Example1 : GenericModify(1,1,User,Telephone,123456)\n
     Example2 : GenericModify(2,1,User)\n
     Example3 : GenericModify(3,1,'User',['Gender','Address'],['\'男\'','\'下北泽\''])\n
+    :param ModifyType: define modify type
+    :param DataID: id of the modify object
+    :param DataBaseModelName: object class name, string
+    :param DataParameterName: object variable name
+    :param NewParameterValue: if set new value, put new value there
+    :return: modify result (True/False)
     '''
     try:
         TargetCommand=''

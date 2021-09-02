@@ -50,6 +50,9 @@ class User(db.Model,EntityBase):
 
         return self._HaveLogin
 
+    def GetLoginStatus(self):
+        return self._HaveLogin
+
     #UserBind
     HaveAnyBind = db.Column(db.Boolean,default=False)
 

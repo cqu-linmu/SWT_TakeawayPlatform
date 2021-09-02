@@ -11,7 +11,7 @@ def foodIndex():
     '''
     首页菜品显示(finish)
     '''
-    resp = {'code': 200, 'message': '操作成功~', 'data': {}}
+    resp = {'statusCode': 200, 'message': '操作成功~', 'data': {}}
 
     # 菜品显示
     food_list = d.PyList()
