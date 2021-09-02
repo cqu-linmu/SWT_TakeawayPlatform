@@ -35,7 +35,7 @@ def index():
                 dishNum = int(dish.split('|')[1])
                 dishInfo = d.PyFind_ID(dishID)
                 dishName = dishInfo.DishName
-                order_dish += dishName+'*'+dishNum+" "
+                order_dish += dishName+'*'+str(dishNum)+" "
             lic.append(
                 {
                     "order_dish": order_dish,
