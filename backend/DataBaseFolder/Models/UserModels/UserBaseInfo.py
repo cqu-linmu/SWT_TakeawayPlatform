@@ -18,13 +18,13 @@ class User(db.Model,EntityBase):
         return InputPassword == self._Password
 
     #StaticInfo
-    HeadPortrait = db.Column(db.String(100),nullable=False,default='DefaultPath')
+    HeadPortrait = db.Column(db.String(1024),nullable=False,default='DefaultPath')
     Address = db.Column(db.String(500), nullable=False)  #Use '/' to divide diverse addresses
     Telephone = db.Column(db.String(20),nullable=False,default='NeedInit')
-    OpenID = db.Column(db.String(50),nullable=False)
+    OpenID = db.Column(db.String(1024),nullable=False)
 
     #DynamicInfo
-    Token = db.Column(db.String(128))
+    Token = db.Column(db.String(1024))
     _HaveLogin = db.Column(db.Boolean,default=False)
     # String to simulate list, use '|' to divide ID and price, use '/' to divide diverse dishes
     Dishes = db.Column(db.String(2000),default='')
