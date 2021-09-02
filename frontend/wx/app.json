@@ -1,0 +1,49 @@
+{
+  "pages":[
+    "pages/home/home",
+    "pages/personal-center/personal-center",
+    "pages/my-address/my-address",
+    "pages/index/index",
+    "pages/my-order/my-order",
+    "pages/evaluate/evaluate",
+    "pages/pay/pay",
+    "pages/dish/dish",
+    "pages/shopCart/shopCart",
+    "pages/add-address/add-address",
+    "pages/logs/logs"
+  ],
+  "tabBar": {
+    "list": [
+      {
+        "pagePath": "pages/home/home",
+        "text": "首页",
+        "iconPath": "static/images/tabbar/home.png",
+        "selectedIconPath": "static/images/tabbar/home _selected.png"
+      },
+      {
+        "pagePath": "pages/shopCart/shopCart",
+        "text": "购物车",
+        "iconPath": "static/images/tabbar/shopCart.png",
+        "selectedIconPath": "static/images/tabbar/shopCart_selected.png"
+      },
+      {
+        "pagePath": "pages/personal-center/personal-center",
+        "text": "个人中心",
+        "iconPath": "static/images/tabbar/user.png",
+        "selectedIconPath": "static/images/tabbar/user_selected.png"
+      }
+    ],
+    "color": "#515151",
+    "selectedColor": "#1296db"
+
+  },
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "食为天",
+    "navigationBarTextStyle":"black",
+    "enablePullDownRefresh": true
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

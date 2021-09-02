@@ -1,0 +1,42 @@
+<!--pages/home/home.wxml-->
+<!-- 推荐菜品循环海报 -->
+<view>
+    <swiper autoplay circular interval="3000" indicator-dots indicator-active-color="#1296db">
+        <swiper-item wx:for="{{recommends}}" wx:for-item="recommend" wx:key="key">
+            <navigator url="{{recommend.url}}">
+                <image src="{{recommend.dish_img}}" />
+            </navigator>
+        </swiper-item>
+    </swiper>
+</view>
+<view class='big-box'>
+    <!-- 菜单栏 -->
+    <view class='left-menu'>
+        <block wx:for="{{dataList}}" wx:key="key">
+            <view class='{{index == idx ? "avtive":"Default-Class"}}' bindtap="switchClassfun" data-index="{{index}}">
+                {{item.dish_type}}</view>
+        </block>
+    </view>
+    <!-- 菜品列表 -->
+    <view style='width:73%;'>
+        <scroll-view class='scrollclass' scroll-y="true" scroll-with-animation="true" enable-back-to-top="true" 
+            scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}" bindscroll="bindscrollfunc" fast-deceleration="true">
+            <block wx:for="{{dataList}}" wx:for-item="item" wx:key="key">
+                <view class='scroll-box position' id="position{{index}}" data-index="{{index}}">
+                    <view class='title'>{{item.dish_type}}</view>
+                    <block wx:for="{{item.dishes}}" wx:for-item="items" wx:key="key">
+                        <!-- 单个菜品展示 -->
+                        <view class='scroll-box-dish-box' bindtap="bindDishTap" data-index="{{items.dish_id}}">
+                            <image src='{{items.dish_img}}' class='dish-img'></image>
+                            <view class='dish-info-box'>
+                                <view class='dish-name'>{{items.dish_name}}</view>
+                                <view class='dish-tag'>{{items.dish_tag}}</view>
+                                <view class='dish-price'>￥{{items.dish_price}}</view>
+                            </view>
+                        </view>
+                    </block>
+                </view>
+            </block>
+        </scroll-view>
+    </view>
+</view>

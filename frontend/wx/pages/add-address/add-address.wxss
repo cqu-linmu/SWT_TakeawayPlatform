@@ -1,0 +1,13 @@
+/* pages/add-address/add-address.wxss */
+.addressInput{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    margin-top: 30px;
+    margin-bottom: 50px;
+  }
+  .line{
+    margin: 0 auto;
+    height: 1px;
+    background-color: #212121;
+  }

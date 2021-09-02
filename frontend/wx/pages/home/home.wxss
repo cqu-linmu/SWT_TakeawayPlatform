@@ -1,0 +1,97 @@
+/* pages/home/home.wxss */
+page{
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+  }
+  
+  .big-box{
+    border-top: 2rpx solid #F7F7F7;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .big-box .left-menu{
+    width: 27%;
+    background: #F7F7F7;
+    height: 100%;
+  }
+  
+  .Default-Class{
+    padding: 26rpx 0;
+    font-size: 28rpx;
+    text-align: center;
+    border-bottom: 1rpx solid #E2E2E2;
+    border-left: 8rpx solid #F7F7F7;
+  }
+  
+  .scrollclass{
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+  
+  .scroll-box .title{
+    padding: 26rpx 20rpx;
+    font-size: 28rpx;
+    text-align: left;
+  }
+  
+  .scroll-box-dish-box{
+    display: flex;
+    justify-content: space-between;
+    width: 94%;
+    margin: auto;
+    padding: 20rpx 0;
+    border-bottom: 1rpx solid #E2E2E2;
+  }
+  
+  .scroll-box-dish-box .dish-img{
+    width: 140rpx;
+    height: 140rpx;
+    border-radius: 10rpx;
+  }
+  
+  .scroll-box-dish-box .dish-info-box{
+    width: 70%;
+    position: relative;
+  }
+  
+  .scroll-box-dish-box .dish-info-box .dish-name{
+    font-weight: 600;
+    color: #333;
+    font-size: 30rpx;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  
+  .scroll-box-dish-box .dish-info-box .dish-tag{
+    color: #666;
+    font-size: 24rpx;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  
+  .scroll-box-dish-box .dish-price{
+    font-weight: 600;
+    color: #333;
+    font-size: 30rpx;
+    position: absolute;
+    bottom: 0rpx;
+  }
+  
+  .avtive{
+    padding: 26rpx 0;
+    background: #fff;
+    border-left: 8rpx solid #89A0D2;
+    color: #333;
+    text-align: center;
+    font-weight: 600;
+    font-size: 28rpx;
+  }

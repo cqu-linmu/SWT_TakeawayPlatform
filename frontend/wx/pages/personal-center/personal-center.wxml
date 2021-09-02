@@ -1,0 +1,24 @@
+<!--pages/personal-center/personal-center.wxml-->
+<view class="container">
+  <view class="userinfo">
+    <block wx:if="{{!hasUserInfo}}">
+      <button bindtap="goLogin" type="primary"> 登录 </button>
+    </block>
+    <block wx:else>
+      <view class="penrsonal-center">
+        <view class="icon">
+          <image class="img" src="{{userInfo.avatarUrl}}"></image>
+        </view>
+
+        <view class="username">{{userInfo.nickName}}</view>
+        <view class="myorder">
+          <button bindtap="goMyOrder" type="primary">{{myOrder}} </button>
+        </view>
+        <view class="myaddress">
+          <button bindtap="goMyAddress" type="default">{{myAddress}} </button>
+        </view>
+
+      </view>
+    </block>
+  </view>
+</view>

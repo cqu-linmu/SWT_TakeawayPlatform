@@ -1,0 +1,38 @@
+/* pages/personal-center/personal-center.wxss */
+.penrsonal-center{
+  display:flex;
+  flex-direction:column;
+}
+.icon{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+.img{
+  margin-top: 80rpx;
+  margin-bottom: 50rpx;
+  width: 250rpx;
+  height: 250rpx;
+  border-radius: 150rpx;
+  /* display: flex; */
+}
+.username{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  margin: 20px;
+}
+.myorder{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  margin: 10px;
+
+}
+.myaddress{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  margin: 10px;
+
+}

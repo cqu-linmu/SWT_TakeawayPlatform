@@ -1,0 +1,48 @@
+<view  style='margin-bottom:130rpx;'>
+    <!-- 商品列表 -->
+    <view class='shopList' data-index='{{index}}' wx:for="{{shopList}}" wx:key="shopId">
+        <view class='shopInfo'>
+            <view >
+                <image class='shopImg' src='{{item.dish_img}}' ></image>
+            </view>
+            <view class='shopCon'>
+                <view class='dish_name'>
+                    {{item.dish_name}}
+                </view>
+                <view class='num'>
+                    数量：{{item.dish_num}}
+                </view>
+                <view class='num'>
+                    单价：￥{{item.dish_price}}
+                </view>
+            </view>
+            <!-- 单类菜品总价格 -->
+            <view class="textTotal">
+                价格：
+            </view>
+            <view class="itemTotal">
+                ￥{{item.dish_num * item.dish_price}}
+            </view>
+        </view>
+    </view>
+    <!-- 结算栏 -->
+    <view class="bottom-container">
+        
+		
+        <!-- 取消按钮 -->
+        <view class="cancelBtn" bindtap="cancel">
+            <view>{{'取消'}}</view>
+        </view>
+        <!-- 支付信息显示 -->
+        <view class='payInfo'>
+            <view class="bottom-text">
+                <view>
+                    共{{totalNum}}个菜品 应付￥{{totalMoney}}
+                </view>
+            </view>
+        </view>
+		<view class="payBtn" bindtap="toPay">
+			<view>{{'支付'}}</view>
+		</view>
+	</view>
+</view>

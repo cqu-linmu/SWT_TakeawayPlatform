@@ -1,0 +1,45 @@
+/*评价区域  */
+.container .evaluate_contant .evaluate_item {
+    height: 300rpx;
+    font-size: 50rpx;
+    color: gray;
+    margin-left: 20rpx;
+    margin-top: 30rpx;
+}
+
+/*评价标题  */
+.container .evaluate_contant .evaluate_item .evaluate_title {
+    text-align:center;
+}
+
+/*评价盒子  */
+.container .evaluate_contant .evaluate_item .evaluate_box {
+    position: absolute;
+    left: 25%;
+    width: 100%;
+    display: inline-block;
+}
+
+/*星星评价的每个图片  */
+.container .evaluate_contant .evaluate_item .evaluate_box .star-image {
+    position: absolute;
+    width: 60rpx;
+    height: 60rpx;
+    src: "../../static/images/star/fill_half-star.png";
+}
+
+/*星星的左边和右边区域<点击左边半个星星，点击右边整个星星>  */
+.container .evaluate_contant .evaluate_item .evaluate_box .star-image .item {
+    position: absolute;
+    top: 0rpx;
+    width: 20rpx;
+    height: 40rpx;
+}
+
+/*按钮  */
+.container .evaluate_contant .submit_button {
+    height: 60rpx;
+    font-size: 40rpx;
+    line-height: 20rpx;
+    margin: 20rpx;
+}

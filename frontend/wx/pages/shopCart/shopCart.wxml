@@ -1,0 +1,58 @@
+<!-- 购物车界面 -->
+<view class="shopcart-main-container">
+	<!-- 编辑选项 -->
+	<view class="opertion-container">
+		<view class="edit" bindtap="onClickEdit">编辑商品</view>
+	</view>
+	<!-- 商品列表 -->
+	<checkbox-group bindchange="handleShopChange">
+		<view class="shop-item {{item.isTouchMove?'touch-move-active':''}}" wx:for="{{cart}}" wx:key="index" data-id="{{index}}" >
+			<label class="shopcart-label" 
+				style="display:flex;align-items:center;" 
+				data-id="{{index}}" 
+				bindtouchstart="touchStart" 
+				bindtouchmove="touchMove" 
+				bindtouchend="touchEnd">
+				<!-- 勾选框 -->
+				<checkbox value="{{index}}" checked="{{item.checked}}" />
+				<view style="display:flex">
+					<!-- 图片 -->
+					<image src="{{item.dish_img}}"></image>
+					<view class="content">
+						<view class="dish-info">
+							<text class="name">{{item.dish_name}}</text>
+							<text style="color:#ccc;font-size:25rpx;margin-top:10rpx">我是商品的规格</text>
+						</view>
+						<view class="dish-price-num">
+							<text>单价：￥{{item.dish_price}}</text>
+							<view class="amount">
+								<view style="color:{{item.dish_num===1?'#c0c0c0':'#000'}};font-size:32rpx" data-type="decrease" data-id="{{index}}" catchtap="handleCountChange">-</view>
+								<view style="width:60rpx;margin:0 15rpx">{{item.dish_num}}</view>
+								<view style="color:{{item.dish_num>=10?'#c0c0c0':'#000'}}" data-type="add" data-id="{{index}}" catchtap="handleCountChange">+</view>
+							</view>
+						</view>
+					</view>
+				</view>
+			</label>
+		</view>
+	</checkbox-group>
+
+	<!-- 底部 -->
+	<view class="bottom-container">
+		<view class="bottom-wrapper">
+			<view class="inner">
+				<checkbox-group bindchange="onSelectAll">
+					<label class="checkall">
+						<checkbox value="all" checked="{{isAllChecked}}"></checkbox>
+						<text>全选</text>
+					</label>
+				</checkbox-group>
+			</view>
+
+		</view>
+		<view class="settlement" bindtap="onPayOrDelete">
+			<text class="total-text" wx:if="{{status==='pay'}}">￥{{totalPrice}}</text>
+			<view class="pay" wx:if="{{totalPrice != 0}}">{{status==='pay'?'提交订单':'删除'}}({{totalCount}})</view>
+		</view>
+	</view>
+</view>

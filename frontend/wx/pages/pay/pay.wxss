@@ -1,0 +1,114 @@
+.gotype {
+    width: 60%;
+    margin: 60rpx auto;
+    padding: 20rpx 0;
+    background: #AE211A;
+    color: #f1f1f1
+}
+
+/* 数据不为空 */
+.nocheck {
+    position: absolute;
+    top: 80rpx;
+    left: 0rpx;
+    width: 30rpx;
+    height: 30rpx;
+    border-radius: 50%;
+    text-align: center;
+    border: 1px solid #e3e3e3;
+    color: #e3e3e3;
+    line-height: 30rpx;
+    font-size: 20rpx;
+}
+.shopList {
+    margin: 0 20rpx;
+    position: relative;
+    border-top: 1px solid #e3e3e3;
+    border-bottom: 1px solid #e3e3e3;
+}
+
+.shopInfo {
+    padding: 20rpx 0 20rpx 60rpx;
+    display: flex;
+    position: relative;
+}
+
+.dish_name {
+    font-size: 50rpx;
+}
+
+.shopImg {
+    width: 160rpx;
+    height: 160rpx;
+}
+
+.shopCon {
+    margin-left: 40rpx;
+}
+
+.num {
+    padding: 5rpx 0;
+    color: #ccc;
+    font-size: 30rpx;
+}
+/* 文本 */
+.textTotal {
+    position: absolute;
+    right: 0; /* 靠右调节 */
+    line-height: 150rpx;
+    font-size: 30rpx;
+}
+/* 单类菜品总价 */
+.itemTotal {
+    position: absolute;
+    right: 0; /* 靠右调节 */
+    line-height: 250rpx;
+    font-size: 50rpx;
+}
+
+/* 底部 */
+.bottom-container {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 99;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 130rpx;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 12rpx 0 15rpx rgba(0, 0, 0, 0.16)
+}
+.payInfo {
+    padding: 10rpx 10rpx;
+    border-top: 1px solid #e3e3e3;
+    margin-left: 50rpx;
+    width: 350rpx;
+    display: flex;
+    justify-content: flex-end;
+}
+.cancelBtn {
+    width: 80rpx;
+    margin-top: 10rpx;
+    margin-left: 20rpx;
+    text-align: center;
+    padding: 10rpx 0rpx;
+    color: rgb(129, 129, 129);
+}
+.payBtn {
+    width: 100rpx;
+    margin-top: 20rpx;
+    margin-right: 10rpx;
+    text-align: center;
+    padding: 10rpx 20rpx;
+    color: #f44;
+    border: 2px solid #f44
+}
+.bottom-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+}

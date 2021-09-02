@@ -1,0 +1,17 @@
+<view>
+  <view class="saying">
+    <view>默认使用1号地址</view>
+    <view>新增地址为新的1号地址</view>
+  </view>
+  <view class="addresses" wx:for="{{addresses}}" wx:key="index">
+    <view class="addressIndex">
+      第{{index+1}}号地址：
+    </view>
+    <view class="address">
+      {{item}}
+    </view>
+  </view>
+
+  <button class="btn" type="primary" bindtap="newAddress">新增地址</button>
+</view>
+

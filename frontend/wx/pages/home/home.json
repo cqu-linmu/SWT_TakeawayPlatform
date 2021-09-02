@@ -1,0 +1,9 @@
+{
+  "usingComponents": {
+  },
+  "backgroundColor": "#F7F7F7",
+  "navigationBarBackgroundColor": "#fff",
+  "navigationBarTitleText": "食为天",
+  "navigationBarTextStyle": "black",
+  "disableScroll":true
+}

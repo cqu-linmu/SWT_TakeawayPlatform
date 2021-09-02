@@ -1,0 +1,41 @@
+<!--pages/dish/dish.wxml-->
+<!-- 图片 -->
+
+<view>
+    <image src="{{dish_img}}"></image>
+</view>
+
+<scroll-view scroll-y="true">
+    <view class="detail">
+        <text class="title">名称：{{dish_name}}</text>
+        <text class="price">单价：{{dish_price}}</text>
+    </view>
+    <view class="separate"></view>
+    <!-- sku选择 -->
+    <view class="numInput">
+        <text bindtap="toggleDialog">购买数量</text>
+        <view class="separate"> </view>
+        <view class="box">
+            <button class="button" bindtap="sub_button" size="mini" type="primary">-</button>
+            <input class="input" type="number"  bindinput="input_number"  value='{{dish_num}}' ></input>
+            <button class="button" bindtap="add_button" size="mini" type="primary">+</button>
+        </view>
+    </view>
+    
+    <view class="separate"></view>
+    <text>商品评价</text>
+    <view class="separate"></view>
+    <view class="comment">
+        <text id="dish_score">评分：{{dish_score}}</text>
+        <image id="star" src="../../static/images/star.png"></image>
+    </view>
+    
+    <view class="temp"></view>
+</scroll-view>
+<!-- 底部悬浮栏 -->
+<view class="detail-nav">
+    <image bindtap="toCart" src="../../static/images/tabbar/shopCart.png" />
+    <view class="line_nav"></view>
+    <button class="button-green" bindtap="addToCar" formType="submit">加入购物车</button>
+    <button class="button-red" bindtap="immeBuy" formType="submit">立即购买</button>
+</view>
