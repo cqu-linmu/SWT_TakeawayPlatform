@@ -8,6 +8,7 @@ from application import app
 from utils.user.UserService import (UserService)  # UserService：封装用户登录相关的方法
 from DataBaseFolder.Construct.ConstructHelper import RandomPwd, RandomTelephone  # 随机20位密码生成
 import DataBaseFolder.Interface.UserBaseModify as U  # 用户编辑接口
+from DataBaseFolder.Interface.InterfaceHelper import GenericModify
 
 route_WXLogin = Blueprint('WXLogin', __name__)
 
@@ -86,17 +87,18 @@ def login():
         # 注册账号并传回自定义登录态
         U.PyAdd(user_name, RandomPwd(), openid, gender, head_portrait, address, RandomTelephone())
         new_user = U.PyFind_Name(user_name)
+        new_user_id = new_user.UserID
         # todo: 泛型
-        new_user.Token = str(token)
-        # todo: 泛型
+        # new_user.Token = str(token)
+        GenericModify(1,new_user_id,'User','Token',str(token))
         new_user.Login()
         resp['data']['token'] = token
         resp['data']['refresh_token'] = refresh_token
-        resp['message'] = "创建并绑定账号成功！ 您的账户id是" + str(new_user.UserID)
+        resp['message'] = "创建并绑定账号成功！ 您的账户id是" + str(new_user_id)
         response = make_response(
             json.dumps(resp))  # 返回登录成功的信息
         response.set_cookie(app.config['AUTH_COOKIE_NAME'], '%s#%s' % (
-            UserService.geneAuthCode(new_user), new_user.UserID), 60 * 60 * 24 * 120)  # 保存120天
+            UserService.geneAuthCode(new_user), new_user_id), 60 * 60 * 24 * 120)  # 保存120天
         return response
 
     elif userInfo.UserName != user_name or userInfo.GetLoginStatus():
@@ -107,7 +109,8 @@ def login():
 
     # openid已经绑定到了现有账户且其他信息正确，则允许直接登陆
     # todo: 泛型
-    userInfo.Token = str(token)
+    # userInfo.Token = str(token)
+    GenericModify(1,userInfo.UserID,'User','Token',str(token))
     userInfo.Login()
     resp['data']['token'] = token
     resp['data']['refresh_token'] = refresh_token

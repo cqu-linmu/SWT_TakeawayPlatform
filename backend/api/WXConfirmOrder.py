@@ -4,6 +4,7 @@ from flask import Blueprint, request, jsonify
 import DataBaseFolder.Interface.RestaurantBaseModify as r
 import DataBaseFolder.Interface.OrderBaseModify as o
 import DataBaseFolder.Interface.DishBaseModify as d
+from DataBaseFolder.Interface.InterfaceHelper import GenericModify
 
 route_WXConfirmOrder = Blueprint('WXConfirmOrder', __name__)
 
@@ -47,14 +48,17 @@ def confirmOrder():
                 restaurantObj = r.PyFind_ID(dishObj.SourceRestaurant)
                 # 更改销售数量
                 # todo: 泛型
-                dishObj.Sold += dishSold
+                GenericModify(1,dishID,'Dish','Sold',str(dishObj.Sold+dishSold))
+                # dishObj.Sold += dishSold
                 # 更改销售额
                 for i in range(dishSold):
                     # todo: 泛型
-                    restaurantObj.TotalBenefits += dishObj.Price
+                    GenericModify(1,restaurantObj.RestaurantID,'Restaurant','TotalBenefits',str(restaurantObj.TotalBenefits + dishObj.Price))
+                    # restaurantObj.TotalBenefits += dishObj.Price
             # 状态更改为待评价
             # todo: 泛型
-            order.OrderStatus = '待评价'
+            GenericModify(1,order.OrderID,'Order','OrderStatus','待评价')
+            # order.OrderStatus = '待评价'
             resp['data']['receive_status'] = 1
         except:
             resp['statusCode'] = 400

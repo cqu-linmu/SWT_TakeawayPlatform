@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from flask import Blueprint, request, jsonify
 from DataBaseFolder.Interface import OrderBaseModify as o
+from DataBaseFolder.Interface.InterfaceHelper import GenericModify
 
 route_WXCancelOrder = Blueprint('WXCancelOrder', __name__)
 
@@ -21,5 +22,6 @@ def index():
         resp['message'] = '取消失败：不能重复取消订单 -1'
     else:
         # todo: 泛型
-        curOrder.OrderStatus = '已取消'
+        # curOrder.OrderStatus = '已取消'
+        GenericModify(1,curOrder.OrderID,'Order','OrderStatus','已取消')
     return jsonify(resp)
