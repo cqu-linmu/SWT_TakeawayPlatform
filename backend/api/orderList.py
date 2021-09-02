@@ -2,6 +2,7 @@ from flask import Blueprint, request, jsonify
 
 # 相关数据库调用
 from DataBaseFolder.Interface import OrderBaseModify as o
+import DataBaseFolder.Interface.DishBaseModify as d
 
 route_orderList = Blueprint('order-list', __name__)
 
@@ -26,9 +27,18 @@ def index():
 
     def bedict(a):
         for item in a:
+            dishes = item.Dishes
+            dishList = dishes.split('/')
+            order_dish = ''
+            for dish in dishList[:-2]:
+                dishID = int(dish.split('|')[0])
+                dishNum = int(dish.split('|')[1])
+                dishInfo = d.PyFind_ID(dishID)
+                dishName = dishInfo.DishName
+                order_dish += dishName+'*'+dishNum+" "
             lic.append(
                 {
-                    "order_dish": item.Dishes,
+                    "order_dish": order_dish,
                     "order_id": item.OrderID,
                     "order_price": item.Price,
                     "order_time": item.OrderTime,
