@@ -12,7 +12,7 @@ route_login = Blueprint('login', __name__)
 
 
 # 用户登录接口  [接口1]
-@route_login.route("", methods=["GET", "POST"])
+@route_login.route("/", methods=["GET", "POST"])
 def login():
     '''
     用户登录接口

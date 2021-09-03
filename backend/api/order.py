@@ -15,6 +15,7 @@ def edit():
     '''
     resp = {'code': 200, 'message': '订单状态修改成功', 'data': {}}
     req = request.values
+    print(req)
     order_id = req['order_id'] if 'order_id' in req else 0
     order_status = req['order_status'] if 'order_status' in req else 0
 

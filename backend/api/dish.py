@@ -88,8 +88,10 @@ def editDish():
     resp = {'code': 200, 'message': '修改菜品成功', 'data': {}}  # 提前定义返回信息
     req = request.values
 
+    print(req)
+
     # 修改数据中菜品的信息
-    dish_id = req['dish_id'] if 'dish_id' in req else ''  # 菜品编号 int
+    dish_id = int(req['dish_id']) if 'dish_id' in req else ''  # 菜品编号 int
     dish_class = int(req['dish_class']) if 'dish_class' in req else ''  # 菜品分类 int
     dish_name = req['dish_name'] if 'dish_name' in req else ''  # 菜品名 str
     dish_price = int(req['dish_price']) if 'dish_price' in req else ''  # 菜品价格 float
@@ -102,6 +104,7 @@ def editDish():
         return jsonify(resp)
 
     dish_info = d.PyFind_ID(dish_id)
+    print(dish_info.DishName)
 
     # 检查菜品价格是否合理
     if not dish_price:
@@ -122,7 +125,7 @@ def editDish():
         return jsonify(resp)
     if not GenericModify(3, dish_id, 'Dish',
                          ['DishName', 'Price', 'DishType', 'Description'],
-                         [str(dish_name), str(dish_price), str(dish_class), str(dish_description)]):
+                         ['\''+str(dish_name)+'\'', str(dish_price), '\''+str(dish_class)+'\'', '\''+str(dish_description)+'\'']):
         resp['code'] = 400
         resp['message'] = "编辑失败"
         return jsonify(resp)
