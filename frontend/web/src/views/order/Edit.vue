@@ -44,7 +44,7 @@
 			const form = ref(null)
 			const state = reactive({
 				model: {
-					order_id: route.params.dish_id,
+					order_id: route.params.order_id,
 					order_status: '',
 				},
 				options:[
@@ -75,11 +75,7 @@
 				],
 			})
 			const submitForm = async params => {
-				let data={
-					order_id: route.params.order_id ,
-					order_status: state.model.order_status ,
-				}
-				const { code, message } = await API.editOrder(data)
+				const { code, message } = await API.editOrder(state.model)
 				if (+code===200) {
 					ctx.$message.success(message)
 					store.dispatch('tags/delTag', route)

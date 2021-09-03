@@ -124,7 +124,6 @@
 					state.dish_classes = data
 					console.log('===============成功读取菜品分类================')
 				}
-				
 				// if(route.params.dish_id) {
 				// 	const {code,data} = await API.GetDishInfo(route.params.dish_id)
 				// 	if(+code===200) {
@@ -136,8 +135,9 @@
 			const submitForm = () => {
 				form.value.validate(async valid => {
 					if(valid) {
+						state.model.dish_id=route.params.dish_id
 						const { code, message } = await API[
-							route.params.dish_id? 'editDish' : 'addDish'
+							route.params.dish_id ? 'editDish' : 'addDish'
 						](state.model)
 						if (+code===200) {
 							ctx.$message.success(message)

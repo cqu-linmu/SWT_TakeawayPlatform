@@ -78,7 +78,7 @@ export default env => {
       open: true,
       proxy: {
         '/api': {
-          target: 'http://10.237.54.25:5111', // 后端接口的域名
+          target: 'http://10.237.54.65:5111/', // 后端接口的域名
           changeOrigin: true,
         },
       },
